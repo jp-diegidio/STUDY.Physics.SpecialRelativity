@@ -1,7 +1,8 @@
 # STUDY.Physics.SpecialRelativity
 
 **STUDY.Physics.SpecialRelativity**  
-**Physics case studies: Special Relativity**
+**Physics case studies: Special Relativity**  
+https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity
 
 Copyright (C) 2020 Julio P. Di Egidio (http://julio.diegidio.name)  
 This software is released under the terms of the
@@ -20,4 +21,4 @@ At the moment, this repository contains the following studies:
   They reset their clocks to zero at the moment they are colocated.
   - [Demo app](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/InertialFrames/App/index.html)
   - [Documentation](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/InertialFrames/Docs/sr.inertial)
-  - [Source code](./InertialFrames)
+  - [Source code](https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity/blob/master/InertialFrames)

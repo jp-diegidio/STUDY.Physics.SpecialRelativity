@@ -18,7 +18,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 Bob and Alice pass by each other collinearly at a relative constant speed.  
 They reset their clocks to zero at the moment they are colocated.
 
-![sr.inertial.png](sr.inertial.png)  
+![sr.inertial: Space-time diagrams](sr.inertial.png)  
 For an interactive version of the diagrams see [Project demo page]
 
 From the space-time diagrams we can readily see that, while each of Bob's and
