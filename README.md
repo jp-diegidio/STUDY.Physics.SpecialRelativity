@@ -19,5 +19,5 @@ At the moment, this repository contains the following studies:
   Bob and Alice pass by each other collinearly at a relative constant speed.  
   They reset their clocks to zero at the moment they are colocated.
   - [Demo app](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/InertialFrames/App/index.html)
-  - [Documentation](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/InertialFrames/Docs/sr.inertial.md)
+  - [Documentation](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/InertialFrames/Docs/sr.inertial)
   - [Source code](./InertialFrames)

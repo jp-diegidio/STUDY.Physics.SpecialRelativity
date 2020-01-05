@@ -10,6 +10,9 @@ InertialFrames is part of the STUDY.Physics.SpecialRelativity collection
 InertialFrames is released under the terms of the GNU-GPLv3 license.  
 As usual, NO WARRANTY OF ANY KIND is implied.
 
+- [Go to interactive demo page](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/InertialFrames/App/index.html)
+- [Go back to project home page](https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity)
+
 ## The game
 
 Bob and Alice pass by each other collinearly at a relative constant speed.  
