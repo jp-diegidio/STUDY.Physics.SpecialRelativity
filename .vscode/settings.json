@@ -1,0 +1,26 @@
+{
+	"git.alwaysShowStagedChangesResourceGroup": true,
+	"git.suggestSmartCommit": false,
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"html.format.wrapLineLength": 0,
+	"html.format.wrapAttributes": "preserve-aligned",
+	"html.format.endWithNewline": true,
+	"html.format.extraLiners": "",
+	"cSpell.language": "en-GB",
+	"cSpell.ignoreWords": [
+		"app's",
+		"ctrl",
+		"ctrls",
+		"desync",
+		"oper",
+		"sim's"
+	],
+	"cSpell.words": [
+		"collinearly",
+		"colocated",
+		"diegidio",
+		"egidio",
+		"knockout"
+	]
+}

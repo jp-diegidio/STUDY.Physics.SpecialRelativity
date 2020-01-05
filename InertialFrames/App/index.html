@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<!--
+InertialFrames version 1.0.0-alpha
+STUDY.Physics.SpecialRelativity/InertialFrames
+Physics case studies: Special Relativity: Inertial Frames
+
+Copyright (C) 2020 Julio P. Di Egidio (http://julio.diegidio.name)
+InertialFrames is part of the STUDY.Physics.SpecialRelativity collection
+(see https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity).
+InertialFrames is released under the terms of the GNU-GPLv3 license.
+As usual, NO WARRANTY OF ANY KIND is implied.
+-->
+<head>
+	<meta charset="utf-8">
+	<title>SR: Inertial Frames</title>
+	<link href="styles/index.css" rel="stylesheet">
+</head>
+<body>
+	<h1>Special Relativity: Inertial Frames</h1>
+
+	<p class="intro">
+		Bob and Alice pass by each other collinearly at a relative constant speed.<br>
+		They reset their clocks to zero at the moment they are colocated.<br>
+	</p>
+
+	<div class="layout-row">
+		<div class="graph">
+			<svg style="display: none" data-bind="visible: true"
+				 viewBox="-2.1 -0.3 4.2 2" preserveAspectRatio="xMidYMid meet"
+				 stroke="grey" stroke-linecap="round" fill="none" font-size="0.5%">
+				<!-- Title:B -->
+				<g transform="translate(-1.5 0)" font-size="160%">
+					<g class="title" stroke-width="0" text-anchor="middle">
+						<text fill="blue" x="0.5" y="0">Bob</text>
+					</g>
+				</g>
+				<!-- Title:A -->
+				<g transform="translate(1.5 0)" font-size="160%">
+					<g class="title" stroke-width="0" text-anchor="middle">
+						<text fill="red" x="-0.5" y="0">Alice</text>
+					</g>
+				</g>
+				<!-- Graph:B -->
+				<g transform="translate(-1.5 1.3) scale(1 -1)" data-bind="with: graphB">
+					<clipPath id="graphB-clip">
+						<rect x="0" y="0" width="1" height="1"></rect>
+					</clipPath>
+					<!-- Axes:Major -->
+					<g stroke-width="0.0035" data-bind="with: grid">
+						<!-- Axis:Major:T -->
+						<line x1="0" x2="0" y1="-0.05" y2="1.1"></line>
+						<line x1="0" x2="-0.025" y1="1.1" y2="1.05"></line>
+						<line x1="0" x2="0.025" y1="1.1" y2="1.05"></line>
+						<!-- Axis:Major:X -->
+						<line x1="-0.05" x2="1.1" y1="0" y2="0"></line>
+						<line x1="1.1" x2="1.05" y1="0" y2="-0.025"></line>
+						<line x1="1.1" x2="1.05" y1="0" y2="0.025"></line>
+					</g>
+					<!-- Axes:Minors -->
+					<!-- ko if: $root.visible.grid -->
+					<g stroke-width="0.0025" data-bind="with: grid">
+						<!-- Axis:Minors:T -->
+						<line x1="1" x2="1" y1="-0.05" y2="1.05"></line>
+						<line y1="-0.05" y2="1.05" data-bind="attr: { x1: X()['gb/g'], x2: X()['gb/g'] }"></line>
+						<!-- Axis:Minors:X -->
+						<line x1="-0.05" x2="1.05" y1="1" y2="1"></line>
+						<line x1="-0.05" x2="1.05" data-bind="attr: { y1: T()['1/g'], y2: T()['1/g'] }"></line>
+					</g>
+					<!-- /ko -->
+					<!-- Labels:Major -->
+					<g stroke-width="0" fill="black" data-bind="with: grid">
+						<g transform="scale(1 -1)">
+							<!-- Labels:Axes -->
+							<g style="font-weight: bold" text-anchor="end">
+								<text x="0" y="-1" dx="-0.045" dy="-0.125">t /T</text>
+							</g>
+							<g style="font-weight: bold" text-anchor="start">
+								<text x="1" y="0" dx="0.125" dy="-0.045">x /cT</text>
+							</g>
+						</g>
+					</g>
+					<!-- Labels:Minors -->
+					<!-- ko if: $root.visible.grid -->
+					<g stroke-width="0" fill="black" data-bind="with: grid">
+						<g transform="scale(1 -1)">
+							<!-- Labels:T -->
+							<g transform="translate(-0.075 0)" text-anchor="end">
+								<text x="0" y="0" dy="0.025">0</text>
+								<text x="0" y="-1" dy="0.025">&gamma;</text>
+								<text x="0" dy="0.025" data-bind="attr: { y: -T()['1/g'] }">1</text>
+							</g>
+							<!-- Labels:X -->
+							<g text-anchor="middle">
+								<text x="0" y="0" dy="0.125">0</text>
+								<text x="1" y="0" dy="0.125">&gamma;</text>
+								<text y="0" dy="0.125" data-bind="attr: { x: X()['gb/g'] }">&gamma;&beta;</text>
+							</g>
+						</g>
+					</g>
+					<!-- /ko -->
+					<!-- Cones -->
+					<!-- ko if: $root.visible.cone -->
+					<g stroke-width="0.0050" stroke-dasharray="0.05 0.03" data-bind="with: cone">
+						<!-- Cones:B -->
+						<g stroke="blue" clip-path="url(#graphB-clip)">
+							<line x1="0" x2="1" data data-bind="attr: { y1: Bp().t0_dg, y2: Bp().t1_dg }"></line>
+							<line x1="0" x2="1" data data-bind="attr: { y1: Bn().t0_dg, y2: Bn().t1_dg }"></line>
+						</g>
+						<!-- Cones:A -->
+						<g stroke="red" clip-path="url(#graphB-clip)">
+							<line x1="0" x2="1" data-bind="attr: { y1: Ap().t0_dg, y2: Ap().t1_dg }"></line>
+							<line x1="0" x2="1" data data-bind="attr: { y1: An().t0_dg, y2: An().t1_dg }"></line>
+						</g>
+					</g>
+					<!-- /ko -->
+					<!-- Syncs -->
+					<!-- ko if: $root.visible.sync -->
+					<g stroke-width="0.0035" stroke-dasharray="0.01 0.01" data-bind="with: sync">
+						<!-- Syncs:B -->
+						<g stroke="blue" clip-path="url(#graphB-clip)">
+							<line y1="0" y2="1" data-bind="attr: { x1: BRv().x0_dg, x2: BRv().x1_dg }"></line>
+							<line x1="0" x2="1" data-bind="attr: { y1: BRh().t0_dg, y2: BRh().t1_dg }"></line>
+						</g>
+						<!-- Syncs:A -->
+						<g stroke="red" clip-path="url(#graphB-clip)">
+							<line y1="0" y2="1" data-bind="attr: { x1: ARv().x0_dg, x2: ARv().x1_dg }"></line>
+							<line x1="0" x2="1" data-bind="attr: { y1: ARh().t0_dg, y2: ARh().t1_dg }"></line>
+						</g>
+					</g>
+					<!-- /ko -->
+					<!-- Lines -->
+					<!-- ko if: $root.visible.line -->
+					<g stroke-width="0.0125" data-bind="with: line">
+						<!-- Lines:B -->
+						<g stroke="blue">
+							<line data-bind="attr: { x1: B().x0_dg, y1: B().t0_dg, x2: B().x1_dg, y2: B().t1_dg }"></line>
+						</g>
+						<!-- Lines:A -->
+						<g stroke="red">
+							<line data-bind="attr: { x1: A().x0_dg, y1: A().t0_dg, x2: A().x1_dg, y2: A().t1_dg }"></line>
+						</g>
+					</g>
+					<!-- /ko -->
+					<!-- Particles -->
+					<!-- ko if: $root.visible.part -->
+					<g stroke-width="0" data-bind="with: part">
+						<!-- Particle:BR -->
+						<circle r="0.045" fill="blue" data-bind="attr: { cx: BR().x_dg, cy: BR().t_dg }"></circle>
+						<!-- Particle:AR -->
+						<circle r="0.040" fill="red" data-bind="attr: { cx: AR().x_dg, cy: AR().t_dg }"></circle>
+						<!-- Particle:AS -->
+						<circle r="0.035" fill="#ff7f00" data-bind="attr: { cx: AS().x_dg, cy: AS().t_dg }"></circle>
+						<!-- Particle:BS -->
+						<circle r="0.030" fill="#30b0f0" data-bind="attr: { cx: BS().x_dg, cy: BS().t_dg }"></circle>
+						<!-- Particle:AA -->
+						<circle r="0.025" fill="#ffc800" data-bind="attr: { cx: AA().x_dg, cy: AA().t_dg }"></circle>
+						<!-- Particle:BA -->
+						<circle r="0.020" fill="#00c800" data-bind="attr: { cx: BA().x_dg, cy: BA().t_dg }"></circle>
+					</g>
+					<!-- /ko -->
+				</g>
+				<!-- Graph:A -->
+				<g transform="translate(1.5 1.3) scale(1 -1)" data-bind="with: graphA">
+					<clipPath id="graphA-clip">
+						<rect x="-1" y="0" width="1" height="1"></rect>
+					</clipPath>
+					<!-- Axes:Major -->
+					<g stroke-width="0.0035" data-bind="with: grid">
+						<!-- Axis:Major:T -->
+						<line x1="0" x2="0" y1="-0.05" y2="1.1"></line>
+						<line x1="0" x2="-0.025" y1="1.1" y2="1.05"></line>
+						<line x1="0" x2="0.025" y1="1.1" y2="1.05"></line>
+						<!-- Axis:Major:X -->
+						<line x1="-1.05" x2="0.1" y1="0" y2="0"></line>
+						<line x1="0.1" x2="0.05" y1="0" y2="-0.025"></line>
+						<line x1="0.1" x2="0.05" y1="0" y2="0.025"></line>
+					</g>
+					<!-- Axes:Minors -->
+					<!-- ko if: $root.visible.grid -->
+					<g stroke-width="0.0025" data-bind="with: grid">
+						<!-- Axis:Minors:T -->
+						<line x1="-1" x2="-1" y1="-0.05" y2="1.05"></line>
+						<line y1="-0.05" y2="1.05" data-bind="attr: { x1: X()['-gb/g'], x2: X()['-gb/g'] }"></line>
+						<!-- Axis:Minors:X -->
+						<line x1="0.05" x2="-1.05" y1="1" y2="1"></line>
+						<line x1="0.05" x2="-1.05" data-bind="attr: { y1: T()['1/g'], y2: T()['1/g'] }"></line>
+					</g>
+					<!-- /ko -->
+					<!-- Labels:Major -->
+					<g stroke-width="0" fill="black" data-bind="with: grid">
+						<g transform="scale(1 -1)">
+							<!-- Labels:Axes -->
+							<g style="font-weight: bold" text-anchor="end">
+								<text x="0" y="-1" dx="-0.045" dy="-0.125">t' /T</text>
+							</g>
+							<g style="font-weight: bold" text-anchor="start">
+								<text x="0" y="0" dx="0.125" dy="-0.045">x' /cT</text>
+							</g>
+						</g>
+					</g>
+					<!-- Labels:Minors -->
+					<!-- ko if: $root.visible.grid -->
+					<g stroke-width="0" fill="black" data-bind="with: grid">
+						<g transform="scale(1 -1)">
+							<!-- Labels:T -->
+							<g transform="translate(-0.075 0)" text-anchor="end">
+								<text x="-1" y="0" dy="0.025">0</text>
+								<text x="-1" y="-1" dy="0.025">&gamma;</text>
+								<text x="-1" dy="0.025" data-bind="attr: { y: -T()['1/g'] }">1</text>
+							</g>
+							<!-- Labels:X -->
+							<g text-anchor="middle">
+								<text x="0" y="0" dy="0.125">0</text>
+								<text x="-1" y="0" dy="0.125">-&gamma;</text>
+								<text y="0" dy="0.125" data-bind="attr: { x: X()['-gb/g'] }">-&gamma;&beta;</text>
+							</g>
+						</g>
+					</g>
+					<!-- /ko -->
+					<!-- Cones -->
+					<!-- ko if: $root.visible.cone -->
+					<g stroke-width="0.0050" stroke-dasharray="0.05 0.03" data-bind="with: cone">
+						<!-- Cones:A -->
+						<g stroke="red" clip-path="url(#graphA-clip)">
+							<line x1="0" x2="-1" data-bind="attr: { y1: Ap().t0_dg, y2: Ap().t1_dg }"></line>
+							<line x1="0" x2="-1" data data-bind="attr: { y1: An().t0_dg, y2: An().t1_dg }"></line>
+						</g>
+						<!-- Cones:B -->
+						<g stroke="blue" clip-path="url(#graphA-clip)">
+							<line x1="0" x2="-1" data data-bind="attr: { y1: Bp().t0_dg, y2: Bp().t1_dg }"></line>
+							<line x1="0" x2="-1" data data-bind="attr: { y1: Bn().t0_dg, y2: Bn().t1_dg }"></line>
+						</g>
+					</g>
+					<!-- /ko -->
+					<!-- Syncs -->
+					<!-- ko if: $root.visible.sync -->
+					<g stroke-width="0.0035" stroke-dasharray="0.01 0.01" data-bind="with: sync">
+						<!-- Syncs:A -->
+						<g stroke="red" clip-path="url(#graphA-clip)">
+							<line y1="0" y2="1" data-bind="attr: { x1: ARv().x0_dg, x2: ARv().x1_dg }"></line>
+							<line x1="0" x2="-1" data-bind="attr: { y1: ARh().t0_dg, y2: ARh().t1_dg }"></line>
+						</g>
+						<!-- Syncs:B -->
+						<g stroke="blue" clip-path="url(#graphA-clip)">
+							<line y1="0" y2="1" data-bind="attr: { x1: BRv().x0_dg, x2: BRv().x1_dg }"></line>
+							<line x1="0" x2="-1" data-bind="attr: { y1: BRh().t0_dg, y2: BRh().t1_dg }"></line>
+						</g>
+					</g>
+					<!-- /ko -->
+					<!-- Lines -->
+					<!-- ko if: $root.visible.line -->
+					<g stroke-width="0.0125" data-bind="with: line">
+						<!-- Lines:A -->
+						<g stroke="red">
+							<line data-bind="attr: { x1: A().x0_dg, y1: A().t0_dg, x2: A().x1_dg, y2: A().t1_dg }"></line>
+						</g>
+						<!-- Lines:B -->
+						<g stroke="blue">
+							<line data-bind="attr: { x1: B().x0_dg, y1: B().t0_dg, x2: B().x1_dg, y2: B().t1_dg }"></line>
+						</g>
+					</g>
+					<!-- /ko -->
+					<!-- Particles -->
+					<!-- ko if: $root.visible.part -->
+					<g stroke-width="0" data-bind="with: part">
+						<!-- Particle:AR -->
+						<circle r="0.045" fill="red" data-bind="attr: { cx: AR().x_dg, cy: AR().t_dg }"></circle>
+						<!-- Particle:BR -->
+						<circle r="0.040" fill="blue" data-bind="attr: { cx: BR().x_dg, cy: BR().t_dg }"></circle>
+						<!-- Particle:BS -->
+						<circle r="0.035" fill="#30b0f0" data-bind="attr: { cx: BS().x_dg, cy: BS().t_dg }"></circle>
+						<!-- Particle:AS -->
+						<circle r="0.030" fill="#ff7f00" data-bind="attr: { cx: AS().x_dg, cy: AS().t_dg }"></circle>
+						<!-- Particle:BA -->
+						<circle r="0.025" fill="#00c800" data-bind="attr: { cx: BA().x_dg, cy: BA().t_dg }"></circle>
+						<!-- Particle:AA -->
+						<circle r="0.020" fill="#ffc800" data-bind="attr: { cx: AA().x_dg, cy: AA().t_dg }"></circle>
+					</g>
+					<!-- /ko -->
+				</g>
+			</svg>
+		</div>
+	</div>
+
+	<div class="layout-row">
+		<table class="ctrl" data-bind="with: ctrl">
+			<caption>Controls</caption>
+			<tr>
+				<th class="name">Speed</th>
+				<td class="input">
+					<input class="slider" type="range"
+						   min="0" max="1" step="0.005" list="speedRange"
+						   disabled data-bind="enable: true, textInput: speed.value">
+					<datalist id="speedRange">
+						<option value="0.25"></option>
+						<option value="0.5"></option>
+						<option value="0.75"></option>
+					</datalist>
+				</td>
+			</tr>
+			<tr>
+				<th class="name">Time</th>
+				<td class="input">
+					<input class="slider" type="range" disabled
+						   min="0" max="1" step="0.005" list="timeRange"
+						   data-bind="enable: true, textInput: time.value,
+										event: { mousedown: onStartEdit }">
+					<datalist id="timeRange">
+						<option value="0.25"></option>
+						<option value="0.5"></option>
+						<option value="0.75"></option>
+					</datalist>
+				</td>
+			</tr>
+			<tr>
+				<th class="name ctrl">Show</th>
+				<td class="input">
+					<label class="check" title="Grid lines">
+						<input class="check" type="checkbox" disabled
+							   data-bind="enable: true, checked: $root.visible.grid">
+						<span>G</span>
+					</label>
+					<label class="check" title="World lines">
+						<input class="check" type="checkbox" disabled
+							   data-bind="enable: true, checked: $root.visible.line">
+						<span>L</span>
+					</label>
+					<label class="check" title="Particles">
+						<input class="check" type="checkbox" disabled
+							   data-bind="enable: true, checked: $root.visible.part">
+						<span>P</span>
+					</label>
+					<label class="check" title="Light cones">
+						<input class="check" type="checkbox" disabled
+							   data-bind="enable: true, checked: $root.visible.cone">
+						<span>C</span>
+					</label>
+					<label class="check" title="Simultaneities">
+						<input class="check" type="checkbox" disabled
+							   data-bind="enable: true, checked: $root.visible.sync">
+						<span>S</span>
+					</label>
+					<label class="check" title="Data tables">
+						<input class="check" type="checkbox" disabled
+							   data-bind="enable: true, checked: $root.visible.data">
+						<span>D</span>
+					</label>
+					<label class="check" title="Data /gamma">
+						<input class="check" type="checkbox" disabled
+							   data-bind="enable: true, checked: $root.visible['d/g']">
+						<span>D/&gamma;</span>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="ctrls">
+					<button class="play" disabled
+							data-bind="enable: canStart, visible: canStart, click: start">PLAY</button>
+					<button class="play" disabled style="display: none"
+							data-bind="enable: canStop, visible: canStop, click: stop">PAUSE</button>
+					<button class="reset" disabled
+							data-bind="enable: canReset, click: reset">R</button>
+					<select class="timeMul" disabled data-bind="
+						enable: true,
+						options: [0.1, 0.2, 0.5, 1, 2],
+						optionsText: function (v) { return 'x ' + v; },
+						value: timeMul.value
+					"></select>
+					<select class="timeFreq" disabled data-bind="
+						enable: true,
+						options: [10, 24, 50, 60],
+						optionsText: function (v) { return '@ ' + v + ' Hz'; },
+						value: timeFreq.value
+					"></select>
+				</td>
+			</tr>
+		</table>
+
+		<table class="info" data-bind="with: info">
+			<caption>Info</caption>
+			<tr>
+				<th class="name">v</th>
+				<td class="oper">&epsiv;</td>
+				<td class="expr">[0,1] c</td>
+				<td class="oper">=</td>
+				<td class="value"><span data-bind="text: speed().toFixed($root.precision)"></span></td>
+				<td class="unit">c</td>
+			</tr>
+			<tr>
+				<th class="name">&tau;</th>
+				<td class="oper">&epsiv;</td>
+				<td class="expr">[0,1] T</td>
+				<td class="oper">=</td>
+				<td class="value"><span data-bind="text: time().toFixed($root.precision)"></span></td>
+				<td class="unit">T</td>
+			</tr>
+			<tr>
+				<th class="name">&beta;</th>
+				<td class="oper">=</td>
+				<td class="expr"><span class="ctrl">v</span> /<span class="const">c</span></td>
+				<td class="oper">=</td>
+				<td class="value"><span data-bind="text: beta().toFixed($root.precision)"></span></td>
+				<td class="unit"></td>
+			</tr>
+			<tr>
+				<th class="name">&gamma;</th>
+				<td class="oper">=</td>
+				<td class="expr">&Sqrt;(1-<span class="ctrl">&beta;</span><sup>2</sup>)<sup>-1</sup></td>
+				<td class="oper">=</td>
+				<td class="value"><span data-bind="text: gamma().toFixed($root.precision)"></span></td>
+				<td class="unit"></td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- ko if: $root.visible.data -->
+	<div class="layout-row" style="display: none" data-bind="visible: true">
+		<table class="data" data-bind="with: dataB">
+			<caption>Data B</caption>
+			<tr>
+				<th class="title realB">Bob</th>
+				<th class="head">t /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
+				<th class="head">x /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>cT</th>
+				<th class="head">v<sub>t</sub> /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
+				<th class="head">v<sub>x</sub> /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>cT</th>
+			</tr>
+			<!-- Part:BR -->
+			<tr class="realB">
+				<th class="name">B<sub>real</sub></th>
+				<td class="value"><span data-bind="text: BR().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BR().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BR().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BR().VX.toFixed($root.precision)"></span></td>
+			</tr>
+			<!-- Part:BS -->
+			<tr class="simB">
+				<th class="name">B<sub>sim</sub></th>
+				<td class="value"><span data-bind="text: BS().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BS().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BS().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BS().VX.toFixed($root.precision)"></span></td>
+			</tr>
+			<!-- Part:BA -->
+			<tr class="appB">
+				<th class="name">B<sub>app</sub></th>
+				<td class="value"><span data-bind="text: BA().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BA().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BA().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BA().VX.toFixed($root.precision)"></span></td>
+			</tr>
+			<!-- Part:AR -->
+			<tr class="realA">
+				<th class="name">A<sub>real</sub></th>
+				<td class="value"><span data-bind="text: AR().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AR().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AR().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AR().VX.toFixed($root.precision)"></span></td>
+			</tr>
+			<!-- Part:AS -->
+			<tr class="simA">
+				<th class="name">A<sub>sim</sub></th>
+				<td class="value"><span data-bind="text: AS().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AS().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AS().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AS().VX.toFixed($root.precision)"></span></td>
+			</tr>
+			<!-- Part:AA -->
+			<tr class="appA">
+				<th class="name">A<sub>app</sub></th>
+				<td class="value"><span data-bind="text: AA().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AA().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AA().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AA().VX.toFixed($root.precision)"></span></td>
+			</tr>
+		</table>
+
+		<table class="data" data-bind="with: dataA">
+			<caption>Data A</caption>
+			<tr>
+				<th class="title realA">Alice</th>
+				<th class="head">t' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
+				<th class="head">x' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>cT</th>
+				<th class="head">v<sub>t</sub>' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
+				<th class="head">v<sub>x</sub>' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>cT</th>
+			</tr>
+			<!-- Part:AR -->
+			<tr class="realA">
+				<th class="name">A<sub>real</sub></th>
+				<td class="value"><span data-bind="text: AR().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AR().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AR().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AR().VX.toFixed($root.precision)"></span></td>
+			</tr>
+			<!-- Part:AS -->
+			<tr class="simA">
+				<th class="name">A<sub>sim</sub></th>
+				<td class="value"><span data-bind="text: AS().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AS().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AS().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AS().VX.toFixed($root.precision)"></span></td>
+			</tr>
+			<!-- Part:AA -->
+			<tr class="appA">
+				<th class="name">A<sub>app</sub></th>
+				<td class="value"><span data-bind="text: AA().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AA().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AA().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: AA().VX.toFixed($root.precision)"></span></td>
+			</tr>
+			<!-- Part:BR -->
+			<tr class="realB">
+				<th class="name">B<sub>real</sub></th>
+				<td class="value"><span data-bind="text: BR().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BR().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BR().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BR().VX.toFixed($root.precision)"></span></td>
+			</tr>
+			<!-- Part:BS -->
+			<tr class="simB">
+				<th class="name">B<sub>sim</sub></th>
+				<td class="value"><span data-bind="text: BS().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BS().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BS().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BS().VX.toFixed($root.precision)"></span></td>
+			</tr>
+			<!-- Part:BA -->
+			<tr class="appB">
+				<th class="name">B<sub>app</sub></th>
+				<td class="value"><span data-bind="text: BA().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BA().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BA().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: BA().VX.toFixed($root.precision)"></span></td>
+			</tr>
+		</table>
+	</div>
+	<!-- /ko -->
+
+	<p class="footer">
+		&copy; 2020 Julio P. Di Egidio<br>
+		Released under GNU-GPLv3<br>
+		<a href="https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity/InertialFrames">Project home page</a><br>
+	</p>
+
+	<script src="scripts/lib/knockout-3.5.1.js"></script>
+	<script src="scripts/logic/sr.inertial.js"></script>
+	<script src="scripts/lib/nan.common.js"></script>
+	<script src="scripts/app/model.js"></script>
+	<script src="scripts/app/control.js"></script>
+	<script src="scripts/app/view.js"></script>
+	<script src="scripts/main.js"></script>
+</body>
+</html>
