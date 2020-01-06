@@ -19,13 +19,18 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	var $common = $global.nan.common;
 
 	function Control(model, options) {
+		var STATE = {
+			BOOTING: "BOOTING",
+			STOPPED: "STOPPED",
+			RUNNING: "RUNNING",
+		};
+
 		var CYCLE_TIME = model.CYCLE_TIME;
 
-		var STATE = model.STATE;
+		var _state = new $ko.observable(STATE.BOOTING),
+			_timer = new $common.SimpleTimer(onTimer);
 
 		var _timeStep, _timerInterval;
-
-		var _timer = new $common.SimpleTimer(onTimer);
 
 		model.timeMul.subscribe(CHANGE_TIMER);
 		model.timeFreq.subscribe(CHANGE_TIMER);
@@ -55,20 +60,12 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			model.setTime(NEXT_TIME(t));
 		}
 
-		function canStart() {
-			return model.state() === STATE.STOPPED;
-		}
-
-		function canStop() {
-			return model.state() === STATE.RUNNING;
-		}
-
-		function canReset() {
-			return model.state() !== STATE.BOOTING;
-		}
+		function canStart() { return _state() === STATE.STOPPED; }
+		function canStop() { return _state() === STATE.RUNNING; }
+		function canReset() { return _state() !== STATE.BOOTING; }
 
 		function start() {
-			model.start();
+			_state(STATE.RUNNING);
 
 			_timer.start(_timerInterval);
 		}
@@ -76,24 +73,29 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		function stop() {
 			_timer.stop();
 
-			model.stop();
+			_state(STATE.STOPPED);
 		}
 
 		function reset(hard) {
-			_timer.stop();
+			stop();
 
 			model.reset(hard);
 		}
 
 		function init() {
 			model.init();
+
+			stop();
 		}
+
+		this.STATE = STATE;
 
 		this.setTimeMul = model.setTimeMul;
 		this.setTimeFreq = model.setTimeFreq;
 		this.setSpeed = model.setSpeed;
 		this.setTime = model.setTime;
 
+		this.state = new $ko.pureComputed(_state);
 		this.canStart = new $ko.pureComputed(canStart);
 		this.canStop = new $ko.pureComputed(canStop);
 		this.canReset = new $ko.pureComputed(canReset);
@@ -101,7 +103,6 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		this.start = function () { if (canStart()) { start(); } };
 		this.stop = function () { if (canStop()) { stop(); } };
 		this.reset = function (hard) { if (canReset()) { reset(hard); } };
-
 		this.init = function () { init(); };
 	}
 

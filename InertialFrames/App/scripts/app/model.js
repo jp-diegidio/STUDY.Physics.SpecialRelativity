@@ -15,12 +15,6 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 	$global.app = $global.app || {};
 
-	var STATE = {		// TODO: Extract state to controller!
-		BOOTING: "BOOTING",
-		STOPPED: "STOPPED",
-		RUNNING: "RUNNING",
-	};
-
 	function FrameModel(frame) {
 		var _grid = new $ko.observable(),
 			_line = new $ko.observable(),
@@ -52,8 +46,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			DEF_TIME_MUL = options.timeMul,
 			DEF_TIME_FREQ = options.timeFreq;
 
-		var _state = new $ko.observable(STATE.BOOTING),
-			_timeMul = new $ko.observable(),
+		var _timeMul = new $ko.observable(),
 			_timeFreq = new $ko.observable(),
 			_speed = new $ko.observable(),
 			_time = new $ko.observable();
@@ -79,9 +72,6 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 		this.CYCLE_TIME = _logic.CYCLE_TIME;
 
-		this.STATE = STATE;
-
-		this.state = new $ko.pureComputed(_state);
 		this.timeMul = new $ko.pureComputed(_timeMul);
 		this.timeFreq = new $ko.pureComputed(_timeFreq);
 		this.speed = new $ko.pureComputed(_speed);
@@ -112,17 +102,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			_logic.setTime(t);
 		};
 
-		this.start = function () {
-			_state(STATE.RUNNING);
-		};
-
-		this.stop = function () {
-			_state(STATE.STOPPED);
-		};
-
 		this.reset = function (hard) {
-			_state(STATE.STOPPED);
-
 			if (hard) {
 				_timeMul(DEF_TIME_MUL);
 				_timeFreq(DEF_TIME_FREQ);

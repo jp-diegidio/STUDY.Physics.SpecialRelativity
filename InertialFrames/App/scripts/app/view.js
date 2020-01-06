@@ -86,9 +86,9 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	}
 
 	function CtrlView(model, control, resetHard) {
-		this.STATE = model.STATE;
+		this.STATE = control.STATE;
 
-		this.state = new $ko.pureComputed(model.state);
+		this.state = new $ko.pureComputed(control.state);
 
 		this.timeMul = new $common.KoPureComputedAsNumber({
 			get: model.timeMul,
