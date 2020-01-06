@@ -67,7 +67,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			read: function () {
 				var value = options.get();
 
-				_valid(true);
+				_valid(true);		// TODO: Verify: do we need this??
 
 				return value.toString();
 			},

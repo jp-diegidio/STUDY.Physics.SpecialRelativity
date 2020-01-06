@@ -14,7 +14,7 @@ very welcome.
 
 ## Introduction
 
-At the moment, this repository contains the following studies:
+At the moment, this repository contains the following case studies:
 
 - **Inertial Frames**  
   Bob and Alice pass by each other collinearly at a relative constant speed.  

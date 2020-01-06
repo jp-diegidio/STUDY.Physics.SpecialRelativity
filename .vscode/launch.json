@@ -3,9 +3,9 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "InertialFrames (Chrome)",
 			"type": "chrome",
 			"request": "launch",
-			"name": "InertialFrames (Chrome)",
 			"file": "${workspaceFolder}\\InertialFrames\\App\\index.html"
 		}
 	]

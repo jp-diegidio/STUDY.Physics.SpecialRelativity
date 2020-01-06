@@ -15,7 +15,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 	$global.app = $global.app || {};
 
-	var STATE = {
+	var STATE = {		// TODO: Extract state to controller!
 		BOOTING: "BOOTING",
 		STOPPED: "STOPPED",
 		RUNNING: "RUNNING",

@@ -125,9 +125,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			AA_vt: function () { return new Value(_g, _1d1pb, 0); },
 			AA_vx: function () { return new Value(_g, _1d1pb * _b, 0); },
 
-			// Given that t/(g(1+b)) = g(1-b)t, we simplify as:
-			// tBA(t) = tBR(g(1-b)t) = g(1-b)t, xBS(t) = xBR(g(1-b)t) = 0
-
+			// Given that 1/(g(1+b)) = g(1-b), we simplify as:		// TODO: Undo this "simplification"!
 			// tBA(t) = tBR(g(1-b)t) = g(1-b)t, xBS(t) = xBR(g(1-b)t) = 0
 			BA_t: function (t) { return new Value(_g, _1mb * t, 1); },
 			BA_x: function (t) { return new Value(_g, 0, 1); },

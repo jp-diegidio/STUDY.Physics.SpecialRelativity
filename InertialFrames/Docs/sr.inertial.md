@@ -1,8 +1,8 @@
 # SpecialRelativity: Inertial frames
 
-InertialFrames version 1.0.0-alpha  
-STUDY.Physics.SpecialRelativity/InertialFrames  
-Physics case studies: Special Relativity: Inertial Frames
+**InertialFrames version 1.0.0-alpha**  
+**STUDY.Physics.SpecialRelativity/InertialFrames**  
+**Physics case studies: Special Relativity: Inertial Frames**
 
 Copyright (C) 2020 Julio P. Di Egidio (http://julio.diegidio.name)  
 InertialFrames is part of the STUDY.Physics.SpecialRelativity collection  
@@ -11,7 +11,7 @@ InertialFrames is released under the terms of the GNU-GPLv3 license.
 As usual, NO WARRANTY OF ANY KIND is implied.
 
 - [Go to interactive demo page](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/InertialFrames/App/index.html)
-- [Go back to project home page](https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity)
+- [Go to project home page](https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity)
 
 ## The game
 
@@ -19,10 +19,11 @@ Bob and Alice pass by each other collinearly at a relative constant speed.
 They reset their clocks to zero at the moment they are colocated.
 
 ![sr.inertial: Space-time diagrams](sr.inertial.png)  
-For an interactive version of the diagrams see [Project demo page]
+(For an interactive version of these diagrams see the
+[interactive demo page](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/InertialFrames/App/index.html).)
 
 From the space-time diagrams we can readily see that, while each of Bob's and
-Alice's clock keeps marking the one and only universal (aka proper) time, in
+Alice's clock keeps marking the one and only universal (aka "proper") time, in
 their own frames each has the other moving away faster in the future, as well
 as faster in space than the plain frame speed, exactly by a factor of gamma.
 
@@ -62,7 +63,7 @@ characters are allowed here and in code.)
 
 This is the frame of reference in which Bob is at rest at the origin of space.
 
-We derive coordinates (and then velocities) in this frame by imposing the
+We derive coordinates (whence the velocities) in this frame by imposing the
 relevant physical constraints, then by plain geometry.
 
 ### Particle B
@@ -84,7 +85,7 @@ with the coordinates as derived above being:
 
 and, by taking derivatives of the coordinates w.r.t. t, the velocities being:
   v_tB(t) = d(tB(t))/dt = 1
-  v_xB(t) = d(tB(t))/dt = 0
+  v_xB(t) = d(xB(t))/dt = 0
 ```
 
 ### Particle A
@@ -100,13 +101,13 @@ from the origin of space-time too is t (i.e. tau), hence t = sqrt\[tA^2 - xA^2\]
  A = (gt, gbt)
 vA = (g,  gb)
 
-with the coordinates as derived above being:
+with the coordinates being:
   tA(t) = gt    in [0, g]
   xA(t) = gbt   in [0, g]
 
-and, by taking derivatives w.r.t. t, the velocities being:
+and the velocities being:
   v_tA(t) = d(tA(t))/dt = g
-  v_xA(t) = d(tA(t))/dt = gb
+  v_xA(t) = d(xA(t))/dt = gb
 ```
 
 ### Particle A_sim
@@ -122,9 +123,9 @@ T = t and X = bt, whence tA_sim and xA_sim.
 We also notice that, all relations being linear, the ratio of A_sim's proper
 distance (from the origin of space-time) to A's proper distance must be the same
 as the ratio of A_sim's time coordinate to A's time coordinate.  A_sim's proper
-distance is t' = sqrt\[tA_sim^2 - xA_sim^2\] = sqrt\[t^2*(1 - b^2)\] = t/g (with
-t' again just a formal parameter), while A's proper distance is given as t,
-hence we get t' = t/g.  So below we rather compute A_sim's coordinates by
+distance is t' = sqrt\[tA_sim^2 - xA_sim^2\] = sqrt\[t^2\*(1 - b^2)\] = t/g
+(with t' again just a formal parameter), while A's proper distance is given as
+t, hence we get t' = t/g.  So below we rather compute A_sim's coordinates by
 applying Alice's *actual* coordinates to this "rescaled proper time" (and, of
 course, we get the same result as above).
 
@@ -138,7 +139,7 @@ with the coordinates being:
 
 and the velocities being:
   v_tA_sim(t) = d(tA_sim(t))/dt = 1
-  v_xA_sim(t) = d(tA_sim(t))/dt = b
+  v_xA_sim(t) = d(xA_sim(t))/dt = b
 ```
 
 ### Particle B_sim
@@ -166,7 +167,7 @@ with the coordinates being:
 
 and the velocities being:
   v_tB_sim(t) = d(tB_sim(t))/dt = 1/g
-  v_xB_sim(t) = d(tB_sim(t))/dt = 0
+  v_xB_sim(t) = d(xB_sim(t))/dt = 0
 ```
 
 ### Particle A_app
@@ -194,7 +195,7 @@ with the coordinates being:
 
 and the velocities being:
   v_tA_app(t) = d(tA_app(t))/dt = 1/(1+b)
-  v_xA_app(t) = d(tA_app(t))/dt = b/(1+b)
+  v_xA_app(t) = d(xA_app(t))/dt = b/(1+b)
 ```
 
 ### Particle B_app
@@ -221,7 +222,7 @@ with the coordinates being:
 
 and the velocities being:
   v_tB_app(t) = d(tB_app(t))/dt = 1/(g(1+b))
-  v_xB_app(t) = d(tB_app(t))/dt = 0
+  v_xB_app(t) = d(xB_app(t))/dt = 0
 ```
 
 ## Diagram boundaries
@@ -244,9 +245,9 @@ We obtain coordinates in this frame by Lorentz-transforming by velocity b the
 corresponding coordinates in frame B.  In fact, this is only to double-check the
 mathematical correctness of our previous derivations, the expected resulting
 diagram being perfectly symmetrical to the one found for frame B, so we could
-more efficiently obtain the coordinates (and indeed we do, in code!) by just
-swapping the roles of (particles) B and A and inverting the sign of the space
-coordinates in all places.
+more efficiently obtain the coordinates in this frame (indeed we do, in code!)
+by just swapping the roles of (particles) B and A and inverting the sign of the
+space coordinates (and velocities) in all places.
 
 ### Particle A'
 
@@ -316,7 +317,7 @@ Given that A_app = (t/(1+b), bt/(1+b)):
 
 ## Diagram boundaries
 
-Again, as can be extrapolated from above, but already by plain symmetry with
+Again, as can be extrapolated from above, and as expected by plain symmetry with
 frame B, coordinate boundaries for frame A are:
 
 ```
