@@ -72,7 +72,7 @@ This are Bob's *actual* space-time location (in frame B).
 
 We derive the coordinates from the constraint that Bob is at rest at the origin
 of space, hence xB = 0, then imposing the constraint that Bob's proper distance
-from the origin of space-time is t (i.e. "tau"), hence t = sqrt\[tB^2 - xB^2\] =
+from the origin of space-time is t (i.e. tau), hence t = sqrt\[tB^2 - xB^2\] =
 tB, hence tB = t:
 
 ```
