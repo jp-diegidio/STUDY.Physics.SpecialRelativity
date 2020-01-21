@@ -22,8 +22,8 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		return t;
 	}
 
-	function GAMMA(v) {
-		return 1 / Math.sqrt(1 - v * v);
+	function GAMMA(b) {
+		return 1 / Math.sqrt(1 - b * b);
 	}
 
 	function Value(g, v, f) {

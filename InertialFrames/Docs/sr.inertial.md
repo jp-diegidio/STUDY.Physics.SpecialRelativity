@@ -1,4 +1,4 @@
-# SpecialRelativity: Inertial frames
+# SpecialRelativity: Inertial Frames
 
 **InertialFrames version 1.0.0-alpha**  
 **STUDY.Physics.SpecialRelativity/InertialFrames**  
@@ -63,12 +63,12 @@ characters are allowed here and in code.)
 
 This is the frame of reference in which Bob is at rest at the origin of space.
 
-We derive coordinates (whence the velocities) in this frame by imposing the
-relevant physical constraints, then by plain geometry.
+We derive coordinates (whence velocities) in this frame by imposing the relevant
+physical constraints, then by plain geometry.
 
 ### Particle B
 
-This are Bob's *actual* space-time location (in frame B).
+This is Bob's *actual* space-time location (in frame B).
 
 We derive the coordinates from the constraint that Bob is at rest at the origin
 of space, hence xB = 0, then imposing the constraint that Bob's proper distance
@@ -145,8 +145,8 @@ and the velocities being:
 ### Particle B_sim
 
 This is the (moving) point of intersection of Bob's world line with Alice's line
-of simultaneity.  It represents what Bob can measure about Alice in his own
-plane of simultaneity, e.g. here he finds length contraction and time dilation.
+of simultaneity.  It represents what Alice can measure about Bob in her own
+plane of simultaneity, e.g. here she finds length contraction and time dilation.
 
 We derive B_sim's coordinates by intersecting B's world line, i.e. X = 0, with
 A's line of simultaneity, i.e. (T-tA) = b\*(X-xA) <=> (T-gt) = b\*(X-gbt), hence
@@ -230,7 +230,7 @@ and the velocities being:
 As can be extrapolated from above, coordinate boundaries for frame B are:
 
 ```
-  t in [0, g]
+  t in [0, g]    // t here denoting the time coordinate
   x in [0, g]
 ```
 
@@ -321,7 +321,7 @@ Again, as can be extrapolated from above, and as expected by plain symmetry with
 frame B, coordinate boundaries for frame A are:
 
 ```
-  t' in [0, g]
+  t' in [0, g]    // t' here denoting the time coordinate
   x' in [0, g]
 ```
 
