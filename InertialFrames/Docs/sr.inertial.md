@@ -127,7 +127,8 @@ distance is t' = sqrt\[tA_sim^2 - xA_sim^2\] = sqrt\[t^2\*(1 - b^2)\] = t/g
 (with t' again just a formal parameter), while A's proper distance is given as
 t, hence we get t' = t/g.  So below we rather compute A_sim's coordinates by
 applying Alice's *actual* coordinates to this "rescaled proper time" (and, of
-course, we get the same result as above).
+course, we get the same result as above).  [That is poorly phrased: I will fix
+it when I find the time...]
 
 ```
  A_sim = (t, bt)
