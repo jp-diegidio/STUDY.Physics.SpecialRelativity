@@ -323,7 +323,7 @@ frame B, coordinate boundaries for frame A are:
 
 ```
   t' in [0, g]    // t' here denoting the time coordinate
-  x' in [0, g]
+  x' in [0, -g]
 ```
 
 This completes our calculations.
