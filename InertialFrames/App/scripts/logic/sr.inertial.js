@@ -51,6 +51,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 		this.setSpeed = function (b) {
 			_b = MOD(b, 1);
+
 			_g = GAMMA(_b);
 			_1d1pb = 1 / (1 + _b);
 
@@ -446,7 +447,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	}
 
 	// Inertial(onSpeed: Function(), onTime: Function()): Inertial
-	// In natural units, cycle time is 1.
+	// SR in 1+1 dimensions, with c = 1, and cycle time = 1.
 	function Inertial(onSpeed, onTime) {
 		var _b, _t;
 

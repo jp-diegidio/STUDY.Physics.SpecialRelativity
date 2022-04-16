@@ -1,4 +1,4 @@
-# SpecialRelativity: Inertial Frames
+# Special Relativity: Inertial Frames
 
 **InertialFrames version 1.0.0-alpha**  
 **STUDY.Physics.SpecialRelativity/InertialFrames**  
@@ -16,7 +16,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 ## The game
 
 Bob and Alice pass by each other collinearly at a relative constant speed.  
-They reset their clocks to zero at the moment they are colocated.
+They reset their respective clocks to zero at the moment they are colocated.
 
 ![sr.inertial: Space-time diagrams](sr.inertial.png)  
 (For an interactive version of these diagrams see the
@@ -35,7 +35,7 @@ is *not* symmetrical.
 
 Below we show derivations of the temporal and spatial coordinates and
 velocities of "particles" B and A (for Bob and Alice, respectively), and of the
-corresponding "projected particles".  We parametrise all formulas, besides on
+corresponding "projected particles".  We parametrize all formulas, besides on
 the relative (frame!) speed, on the (one!) proper time.
 
 ## Formal setup

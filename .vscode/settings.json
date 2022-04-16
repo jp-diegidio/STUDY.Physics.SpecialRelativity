@@ -7,20 +7,37 @@
 	"html.format.wrapAttributes": "preserve-aligned",
 	"html.format.endWithNewline": true,
 	"html.format.extraLiners": "",
-	"cSpell.language": "en-GB",
+	"js/ts.implicitProjectConfig.target": "ES5",
+	"js/ts.implicitProjectConfig.module": "None",
+	"js/ts.implicitProjectConfig.checkJs": true,
+	"js/ts.implicitProjectConfig.strictNullChecks": true,
+	"js/ts.implicitProjectConfig.strictFunctionTypes": true,
+	"cSpell.language": "en-US",
 	"cSpell.ignoreWords": [
-		"app's",
+		"alignat",
+		"bigg",
+		"cmod",
 		"ctrl",
 		"ctrls",
 		"desync",
+		"disp",
+		"drng",
+		"infty",
+		"irng",
+		"mathbb",
+		"mathjax",
+		"mathrm",
 		"oper",
-		"sim's"
+		"subseteq"
 	],
 	"cSpell.words": [
+		"chtml",
 		"collinearly",
 		"colocated",
+		"desmos",
 		"diegidio",
 		"egidio",
-		"knockout"
+		"knockout",
+		"WLOG"
 	]
 }
