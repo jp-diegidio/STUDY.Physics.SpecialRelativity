@@ -19,7 +19,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	font-display: fallback;
 	font-weight: normal;
 	font-style: normal;
-	src: url("../fonts/Roboto-Regular.ttf");
+	src: url("../../../../shared/fonts/Roboto/Roboto-Regular.ttf");
 }
 
 @font-face {
@@ -27,7 +27,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	font-display: fallback;
 	font-weight: normal;
 	font-style: italic;
-	src: url("../fonts/Roboto-Italic.ttf");
+	src: url("../../../../shared/fonts/Roboto/Roboto-Italic.ttf");
 }
 
 @font-face {
@@ -35,7 +35,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	font-display: fallback;
 	font-weight: bold;
 	font-style: normal;
-	src: url("../fonts/Roboto-Bold.ttf");
+	src: url("../../../../shared/fonts/Roboto/Roboto-Bold.ttf");
 }
 
 /********************************************************************
@@ -43,7 +43,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
  ********************************************************************/
 
 body {
-    font-family: Roboto, sans-serif;
+	font-family: Roboto, sans-serif;
 	font-size: 100%;
 	font-weight: normal;
 	font-style: normal;
@@ -78,10 +78,10 @@ input {
 	background-color: #f0f0f0;
 }
 
-	input[type=range] {
-		height: 1.5em;
-		background-color: transparent;
-	}
+input[type=range] {
+	height: 1.5em;
+	background-color: transparent;
+}
 
 select {
 	font-family: Roboto, sans-serif;
@@ -122,7 +122,8 @@ caption {
 	text-decoration: underline;
 }
 
-th, td {
+th,
+td {
 	padding: 0.1em;
 	text-align: center;
 	white-space: nowrap;
@@ -196,9 +197,9 @@ table.data td {
 	border-width: 0.1em;
 }
 
-	table.data th.title {
-		border-style: none;
-	}
+table.data th.title {
+	border-style: none;
+}
 
 /********************************************************************
  * Data styles
@@ -236,15 +237,15 @@ td.expr {
 	width: 4.6em;
 }
 
-	td.expr .ctrl {
-		font-style: normal;
-		font-weight: normal;
-	}
+td.expr .ctrl {
+	font-style: normal;
+	font-weight: normal;
+}
 
-	td.expr .const {
-		font-style: normal;
-		font-weight: normal;
-	}
+td.expr .const {
+	font-style: normal;
+	font-weight: normal;
+}
 
 /********************************************************************
  * Table styles
@@ -264,77 +265,77 @@ table.data tr {
 	height: 2em;
 }
 
-	table.data th.name {
-		width: 3.6em;
-	}
+table.data th.name {
+	width: 3.6em;
+}
 
-	table.data td.value {
-		width: 3.6em;
-	}
+table.data td.value {
+	width: 3.6em;
+}
 
 table.ctrl tr {
 	font-size: 90%;
 	height: 2em;
 }
 
-	table.ctrl th.name {
-		width: 3.5em;
-	}
+table.ctrl th.name {
+	width: 3.5em;
+}
 
-		table.ctrl th.name.ctrl {
-			font-style: italic;
-		}
+table.ctrl th.name.ctrl {
+	font-style: italic;
+}
 
-	td.input {
-		width: 20em;
-	}
+td.input {
+	width: 20em;
+}
 
-		td.input input.value {
-			width: 5em;
-		}
+td.input input.value {
+	width: 5em;
+}
 
-		td.input input.slider {
-			width: 20em;
-		}
+td.input input.slider {
+	width: 20em;
+}
 
-		td.input label.check {
-			font-size: 90%;
-			margin: 0 0.3em;
-		}
+td.input label.check {
+	font-size: 90%;
+	margin: 0 0.3em;
+}
 
-			td.input input.check {
-				margin: 0;
-			}
+td.input input.check {
+	margin: 0;
+}
 
-	td.ctrls {
-		position: relative;
-		/* border: solid 1px yellow; */
-	}
+td.ctrls {
+	position: relative;
+	/* border: solid 1px yellow; */
+}
 
-		td.ctrls button {
-			width: 5em;
-			margin-top: 0.5em;
-			margin-bottom: 0.5em;
-			margin-right: 0.5em;
-			font-size: 120%;
-			line-height: 1.2;
-		}
+td.ctrls button {
+	width: 5em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-right: 0.5em;
+	font-size: 120%;
+	line-height: 1.2;
+}
 
-			td.ctrls button.reset {
-				width: 2em;
-				font-weight: normal;
-				font-style: italic;
-			}
+td.ctrls button.reset {
+	width: 2em;
+	font-weight: normal;
+	font-style: italic;
+}
 
-		td.ctrls select {
-			height: 1.65em;
-			margin-left: 1em;
-		}
+td.ctrls select {
+	height: 1.65em;
+	margin-left: 1em;
+}
 
-			td.ctrls select.timeMul {
-				width: 4.7em;
-			}
+td.ctrls select.timeMul {
+	width: 4.7em;
+}
 
-			td.ctrls select.timeFreq {
-				width: 6.2em;
-			}
+td.ctrls select.timeFreq {
+	width: 6.2em;
+}

@@ -13,10 +13,8 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 (function ($global, $ko) {
 	"use strict";
 
-	$global.app = $global.app || {};
-
 	// requires:
-	var $common = $global.nan.common;
+	var $timers = $global["nan"].common.timers;
 
 	function Control(model, options) {
 		var STATE = {
@@ -28,7 +26,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		var CYCLE_TIME = model.CYCLE_TIME;
 
 		var _state = new $ko.observable(STATE.BOOTING),
-			_timer = new $common.SimpleTimer(onTimer);
+			_timer = new $timers.SimpleTimer(onTimer);
 
 		var _timeStep, _timerInterval;
 
@@ -106,5 +104,10 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		this.init = function () { init(); };
 	}
 
-	$global.app.Control = Control;
-})(window, ko);
+	///////////////////////////////////////////////////////////////////////////
+
+	// TODO: Export jsdoc, too... #####
+	var $app = $global["app"] || {};
+	$app.Control = Control;
+	$global["app"] = $app;
+})(window, window["ko"]);

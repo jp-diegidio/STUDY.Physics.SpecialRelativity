@@ -14,10 +14,10 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	"use strict";
 
 	// requires:
-	var $Logic = $global.logic.SR.Inertial,
-		$Model = $global.app.Model,
-		$Control = $global.app.Control,
-		$View = $global.app.View;
+	var $Logic = $global["logic"].SR.Inertial,
+		$Model = $global["app"].Model,
+		$Control = $global["app"].Control,
+		$View = $global["app"].View;
 
 	// mandatory:
 	var OPTIONS = {
@@ -54,4 +54,4 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 		$ko.applyBindings(_view);
 	});
-})(window, ko);
+})(window, window["ko"]);

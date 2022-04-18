@@ -13,10 +13,8 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 (function ($global, $ko) {
 	"use strict";
 
-	$global.app = $global.app || {};
-
 	// requires:
-	var $common = $global.nan.common;
+	var $cko = $global["nan"].common.ko;
 
 	function GraphView(frame) {
 		var _F = frame;
@@ -90,22 +88,22 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 		this.state = new $ko.pureComputed(control.state);
 
-		this.timeMul = new $common.KoPureComputedAsNumber({
+		this.timeMul = new $cko.PureComputedAsNumber({
 			get: model.timeMul,
 			set: control.setTimeMul
 		});
 
-		this.timeFreq = new $common.KoPureComputedAsNumber({
+		this.timeFreq = new $cko.PureComputedAsNumber({
 			get: model.timeFreq,
 			set: control.setTimeFreq
 		});
 
-		this.speed = new $common.KoPureComputedAsNumber({
+		this.speed = new $cko.PureComputedAsNumber({
 			get: model.speed,
 			set: control.setSpeed
 		});
 
-		this.time = new $common.KoPureComputedAsNumber({
+		this.time = new $cko.PureComputedAsNumber({
 			get: model.time,
 			set: control.setTime
 		});
@@ -159,5 +157,10 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		this.info = new InfoView(model);
 	}
 
-	$global.app.View = View;
-})(window, ko);
+	///////////////////////////////////////////////////////////////////////////
+
+	// TODO: Export jsdoc, too... #####
+	var $app = $global["app"] || {};
+	$app.View = View;
+	$global["app"] = $app;
+})(window, window["ko"]);

@@ -13,8 +13,6 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 (function ($global, $ko) {
 	"use strict";
 
-	$global.app = $global.app || {};
-
 	function FrameModel(frame) {
 		var _grid = new $ko.observable(),
 			_line = new $ko.observable(),
@@ -83,7 +81,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		this.gamma = new $ko.pureComputed(function () {
 			var b = _speed();
 
-			return _logic.GAMMA(b);
+			return _logic.gamma(b);
 		});
 
 		this.setTimeMul = function (tm) {
@@ -119,5 +117,10 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		};
 	}
 
-	$global.app.Model = Model;
-})(window, ko);
+	///////////////////////////////////////////////////////////////////////////
+
+	// TODO: Export jsdoc, too... #####
+	var $app = $global["app"] || {};
+	$app.Model = Model;
+	$global["app"] = $app;
+})(window, window["ko"]);

@@ -13,30 +13,8 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 (function ($global) {
 	"use strict";
 
-	$global.logic = $global.logic || {};
-
-	function MOD(t, m) {
-		if (t === 0) { return 0; }
-		t = t > 0 ? t % m : (m + t % m) % m;
-		if (t === 0) { return m; }
-		return t;
-	}
-
-	function GAMMA(b) {
-		return 1 / Math.sqrt(1 - b * b);
-	}
-
-	function Value(g, v, f) {
-		// val = v * g^(f+p)
-
-		this._g = g;
-		this._v = v;
-		this._f = f;
-
-		this.val = function (p) {
-			return v === 0 ? 0 : v * Math.pow(g, f + p);
-		};
-	}
+	// requires:
+	var $Math = $global["nan"].common.Math;
 
 	function Calc() {
 		// For b in [0,1] (mod 1):    // speed
@@ -50,9 +28,9 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		var _b, _g, _1d1pb, _t;
 
 		this.setSpeed = function (b) {
-			_b = MOD(b, 1);
+			_b = $Math.cmod(b, 1);
 
-			_g = GAMMA(_b);
+			_g = $Math.gamma(_b);
 			_1d1pb = 1 / (1 + _b);
 
 			// START: Keep order!
@@ -69,7 +47,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		};
 
 		this.setTime = function (t) {
-			_t = MOD(t, 1);
+			_t = $Math.cmod(t, 1);
 
 			// START: Keep order!
 
@@ -91,44 +69,44 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 		var _pRealB = {
 			// tBR(t) = t, xBR(t) = 0
-			BR_t: function (t) { return new Value(_g, t, 0); },
-			BR_x: function (t) { return new Value(_g, 0, 0); },
-			BR_vt: function () { return new Value(_g, 1, 0); },
-			BR_vx: function () { return new Value(_g, 0, 0); },
+			BR_t: function (t) { return new $Math.Scalar(t, _g, 0); },
+			BR_x: function (t) { return new $Math.Scalar(0, _g, 0); },
+			BR_vt: function () { return new $Math.Scalar(1, _g, 0); },
+			BR_vx: function () { return new $Math.Scalar(0, _g, 0); },
 
 			// tAR(t) = gt, xAR(t) = gbt
-			AR_t: function (t) { return new Value(_g, t, 1); },
-			AR_x: function (t) { return new Value(_g, _b * t, 1); },
-			AR_vt: function () { return new Value(_g, 1, 1); },
-			AR_vx: function () { return new Value(_g, _b, 1); }
+			AR_t: function (t) { return new $Math.Scalar(t, _g, 1); },
+			AR_x: function (t) { return new $Math.Scalar(_b * t, _g, 1); },
+			AR_vt: function () { return new $Math.Scalar(1, _g, 1); },
+			AR_vx: function () { return new $Math.Scalar(_b, _g, 1); }
 		};
 
 		var _pSimB = {
 			// tAS(t) = tAR(t/g) = t, xAS(t) = xAR(t/g) = bt
-			AS_t: function (t) { return new Value(_g, t, 0); },
-			AS_x: function (t) { return new Value(_g, _b * t, 0); },
-			AS_vt: function () { return new Value(_g, 1, 0); },
-			AS_vx: function () { return new Value(_g, _b, 0); },
+			AS_t: function (t) { return new $Math.Scalar(t, _g, 0); },
+			AS_x: function (t) { return new $Math.Scalar(_b * t, _g, 0); },
+			AS_vt: function () { return new $Math.Scalar(1, _g, 0); },
+			AS_vx: function () { return new $Math.Scalar(_b, _g, 0); },
 
 			// tBS(t) = tBR(t/g) = t/g, xBS(t) = xBR(t/g) = 0
-			BS_t: function (t) { return new Value(_g, t, -1); },
-			BS_x: function (t) { return new Value(_g, 0, -1); },
-			BS_vt: function () { return new Value(_g, 1, -1); },
-			BS_vx: function () { return new Value(_g, 0, -1); }
+			BS_t: function (t) { return new $Math.Scalar(t, _g, -1); },
+			BS_x: function (t) { return new $Math.Scalar(0, _g, -1); },
+			BS_vt: function () { return new $Math.Scalar(1, _g, -1); },
+			BS_vx: function () { return new $Math.Scalar(0, _g, -1); }
 		};
 
 		var _pAppB = {
 			// tAA(t) = tAR(t/(g(1+b))) = t/(1+b), xAA(t) = xAR(t/(g(1+b))) = bt/(1+b)
-			AA_t: function (t) { return new Value(_g, _1d1pb * t, 0); },
-			AA_x: function (t) { return new Value(_g, _1d1pb * _b * t, 0); },
-			AA_vt: function () { return new Value(_g, _1d1pb, 0); },
-			AA_vx: function () { return new Value(_g, _1d1pb * _b, 0); },
+			AA_t: function (t) { return new $Math.Scalar(_1d1pb * t, _g, 0); },
+			AA_x: function (t) { return new $Math.Scalar(_1d1pb * _b * t, _g, 0); },
+			AA_vt: function () { return new $Math.Scalar(_1d1pb, _g, 0); },
+			AA_vx: function () { return new $Math.Scalar(_1d1pb * _b, _g, 0); },
 
 			// tBA(t) = tBR(t/(g(1+b))) = t/(g(1+b)), xBA(t) = xBR(t/(g(1+b))) = 0
-			BA_t: function (t) { return new Value(_g, _1d1pb * t, -1); },
-			BA_x: function (t) { return new Value(_g, 0, -1); },
-			BA_vt: function () { return new Value(_g, _1d1pb, -1); },
-			BA_vx: function () { return new Value(_g, 0, -1); }
+			BA_t: function (t) { return new $Math.Scalar(_1d1pb * t, _g, -1); },
+			BA_x: function (t) { return new $Math.Scalar(0, _g, -1); },
+			BA_vt: function () { return new $Math.Scalar(_1d1pb, _g, -1); },
+			BA_vx: function () { return new $Math.Scalar(0, _g, -1); }
 		};
 
 		var _cone = {
@@ -464,7 +442,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		}
 
 		this.CYCLE_TIME = 1;
-		this.GAMMA = GAMMA;
+		this.gamma = $Math.gamma;
 
 		this.speed = function () { return _b; };
 		this.time = function () { return _t; };
@@ -490,7 +468,11 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		};
 	}
 
-	$global.logic.SR = {
-		Inertial: Inertial
-	};
+	///////////////////////////////////////////////////////////////////////////
+
+	// TODO: Export jsdoc, too... #####
+	var $logic = $global["logic"] || {};
+	$logic.SR = $logic.SR || {};
+	$logic.SR.Inertial = Inertial;
+	$global["logic"] = $logic;
 })(window);
