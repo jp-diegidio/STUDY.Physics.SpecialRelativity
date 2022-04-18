@@ -67,10 +67,10 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					<g stroke-width="0.0025" data-bind="with: grid">
 						<!-- Axis:Minors:T -->
 						<line x1="1" x2="1" y1="-0.05" y2="1.05"></line>
-						<line y1="-0.05" y2="1.05" data-bind="attr: { x1: X()['gb/g'], x2: X()['gb/g'] }"></line>
+						<line y1="-0.05" y2="1.05" data-bind="attr: { x1: T['gb/g'], x2: T['gb/g'] }"></line>
 						<!-- Axis:Minors:X -->
 						<line x1="-0.05" x2="1.05" y1="1" y2="1"></line>
-						<line x1="-0.05" x2="1.05" data-bind="attr: { y1: T()['1/g'], y2: T()['1/g'] }"></line>
+						<line x1="-0.05" x2="1.05" data-bind="attr: { y1: X['1/g'], y2: X['1/g'] }"></line>
 					</g>
 					<!-- /ko -->
 					<!-- Labels:Major -->
@@ -93,13 +93,13 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 							<g transform="translate(-0.075 0)" text-anchor="end">
 								<text x="0" y="0" dy="0.025">0</text>
 								<text x="0" y="-1" dy="0.025">&gamma;</text>
-								<text x="0" dy="0.025" data-bind="attr: { y: -T()['1/g'] }">1</text>
+								<text x="0" dy="0.025" data-bind="attr: { y: -X['1/g'] }">1</text>
 							</g>
 							<!-- Labels:X -->
 							<g text-anchor="middle">
 								<text x="0" y="0" dy="0.125">0</text>
 								<text x="1" y="0" dy="0.125">&gamma;</text>
-								<text y="0" dy="0.125" data-bind="attr: { x: X()['gb/g'] }">&gamma;&beta;</text>
+								<text y="0" dy="0.125" data-bind="attr: { x: T['gb/g'] }">&gamma;&beta;</text>
 							</g>
 						</g>
 					</g>
@@ -109,13 +109,13 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					<g stroke-width="0.0050" stroke-dasharray="0.05 0.03" data-bind="with: cone">
 						<!-- Cones:B -->
 						<g stroke="blue" clip-path="url(#graphB-clip)">
-							<line x1="0" x2="1" data data-bind="attr: { y1: Bp().t0_dg, y2: Bp().t1_dg }"></line>
-							<line x1="0" x2="1" data data-bind="attr: { y1: Bn().t0_dg, y2: Bn().t1_dg }"></line>
+							<line x1="0" x2="1" data data-bind="attr: { y1: B.p.t0_dg, y2: B.p.t1_dg }"></line>
+							<line x1="0" x2="1" data data-bind="attr: { y1: B.n.t0_dg, y2: B.n.t1_dg }"></line>
 						</g>
 						<!-- Cones:A -->
 						<g stroke="red" clip-path="url(#graphB-clip)">
-							<line x1="0" x2="1" data-bind="attr: { y1: Ap().t0_dg, y2: Ap().t1_dg }"></line>
-							<line x1="0" x2="1" data data-bind="attr: { y1: An().t0_dg, y2: An().t1_dg }"></line>
+							<line x1="0" x2="1" data-bind="attr: { y1: A.p.t0_dg, y2: A.p.t1_dg }"></line>
+							<line x1="0" x2="1" data data-bind="attr: { y1: A.n.t0_dg, y2: A.n.t1_dg }"></line>
 						</g>
 					</g>
 					<!-- /ko -->
@@ -124,13 +124,13 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					<g stroke-width="0.0035" stroke-dasharray="0.01 0.01" data-bind="with: sync">
 						<!-- Syncs:B -->
 						<g stroke="blue" clip-path="url(#graphB-clip)">
-							<line y1="0" y2="1" data-bind="attr: { x1: BRv().x0_dg, x2: BRv().x1_dg }"></line>
-							<line x1="0" x2="1" data-bind="attr: { y1: BRh().t0_dg, y2: BRh().t1_dg }"></line>
+							<line y1="0" y2="1" data-bind="attr: { x1: B.v.x0_dg, x2: B.v.x1_dg }"></line>
+							<line x1="0" x2="1" data-bind="attr: { y1: B.h.t0_dg, y2: B.h.t1_dg }"></line>
 						</g>
 						<!-- Syncs:A -->
 						<g stroke="red" clip-path="url(#graphB-clip)">
-							<line y1="0" y2="1" data-bind="attr: { x1: ARv().x0_dg, x2: ARv().x1_dg }"></line>
-							<line x1="0" x2="1" data-bind="attr: { y1: ARh().t0_dg, y2: ARh().t1_dg }"></line>
+							<line y1="0" y2="1" data-bind="attr: { x1: A.v.x0_dg, x2: A.v.x1_dg }"></line>
+							<line x1="0" x2="1" data-bind="attr: { y1: A.h.t0_dg, y2: A.h.t1_dg }"></line>
 						</g>
 					</g>
 					<!-- /ko -->
@@ -139,29 +139,29 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					<g stroke-width="0.0125" data-bind="with: line">
 						<!-- Lines:B -->
 						<g stroke="blue">
-							<line data-bind="attr: { x1: B().x0_dg, y1: B().t0_dg, x2: B().x1_dg, y2: B().t1_dg }"></line>
+							<line data-bind="attr: { x1: B.x0_dg, y1: B.t0_dg, x2: B.x1_dg, y2: B.t1_dg }"></line>
 						</g>
 						<!-- Lines:A -->
 						<g stroke="red">
-							<line data-bind="attr: { x1: A().x0_dg, y1: A().t0_dg, x2: A().x1_dg, y2: A().t1_dg }"></line>
+							<line data-bind="attr: { x1: A.x0_dg, y1: A.t0_dg, x2: A.x1_dg, y2: A.t1_dg }"></line>
 						</g>
 					</g>
 					<!-- /ko -->
 					<!-- Particles -->
 					<!-- ko if: $root.visible.part -->
 					<g stroke-width="0" data-bind="with: part">
-						<!-- Particle:BR -->
-						<circle r="0.045" fill="blue" data-bind="attr: { cx: BR().x_dg, cy: BR().t_dg }"></circle>
-						<!-- Particle:AR -->
-						<circle r="0.040" fill="red" data-bind="attr: { cx: AR().x_dg, cy: AR().t_dg }"></circle>
-						<!-- Particle:AS -->
-						<circle r="0.035" fill="#ff7f00" data-bind="attr: { cx: AS().x_dg, cy: AS().t_dg }"></circle>
-						<!-- Particle:BS -->
-						<circle r="0.030" fill="#30b0f0" data-bind="attr: { cx: BS().x_dg, cy: BS().t_dg }"></circle>
-						<!-- Particle:AA -->
-						<circle r="0.025" fill="#ffc800" data-bind="attr: { cx: AA().x_dg, cy: AA().t_dg }"></circle>
-						<!-- Particle:BA -->
-						<circle r="0.020" fill="#00c800" data-bind="attr: { cx: BA().x_dg, cy: BA().t_dg }"></circle>
+						<!-- Particle:B.act -->
+						<circle r="0.045" fill="blue" data-bind="attr: { cx: B.act.x_dg, cy: B.act.t_dg }"></circle>
+						<!-- Particle:A.act -->
+						<circle r="0.040" fill="red" data-bind="attr: { cx: A.act.x_dg, cy: A.act.t_dg }"></circle>
+						<!-- Particle:A.sim -->
+						<circle r="0.035" fill="#ff7f00" data-bind="attr: { cx: A.sim.x_dg, cy: A.sim.t_dg }"></circle>
+						<!-- Particle:B.sim -->
+						<circle r="0.030" fill="#30b0f0" data-bind="attr: { cx: B.sim.x_dg, cy: B.sim.t_dg }"></circle>
+						<!-- Particle:A.vis -->
+						<circle r="0.025" fill="#ffc800" data-bind="attr: { cx: A.vis.x_dg, cy: A.vis.t_dg }"></circle>
+						<!-- Particle:B.vis -->
+						<circle r="0.020" fill="#00c800" data-bind="attr: { cx: B.vis.x_dg, cy: B.vis.t_dg }"></circle>
 					</g>
 					<!-- /ko -->
 				</g>
@@ -186,10 +186,10 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					<g stroke-width="0.0025" data-bind="with: grid">
 						<!-- Axis:Minors:T -->
 						<line x1="-1" x2="-1" y1="-0.05" y2="1.05"></line>
-						<line y1="-0.05" y2="1.05" data-bind="attr: { x1: X()['-gb/g'], x2: X()['-gb/g'] }"></line>
+						<line y1="-0.05" y2="1.05" data-bind="attr: { x1: T['-gb/g'], x2: T['-gb/g'] }"></line>
 						<!-- Axis:Minors:X -->
 						<line x1="0.05" x2="-1.05" y1="1" y2="1"></line>
-						<line x1="0.05" x2="-1.05" data-bind="attr: { y1: T()['1/g'], y2: T()['1/g'] }"></line>
+						<line x1="0.05" x2="-1.05" data-bind="attr: { y1: X['1/g'], y2: X['1/g'] }"></line>
 					</g>
 					<!-- /ko -->
 					<!-- Labels:Major -->
@@ -212,13 +212,13 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 							<g transform="translate(-0.075 0)" text-anchor="end">
 								<text x="-1" y="0" dy="0.025">0</text>
 								<text x="-1" y="-1" dy="0.025">&gamma;</text>
-								<text x="-1" dy="0.025" data-bind="attr: { y: -T()['1/g'] }">1</text>
+								<text x="-1" dy="0.025" data-bind="attr: { y: -X['1/g'] }">1</text>
 							</g>
 							<!-- Labels:X -->
 							<g text-anchor="middle">
 								<text x="0" y="0" dy="0.125">0</text>
 								<text x="-1" y="0" dy="0.125">-&gamma;</text>
-								<text y="0" dy="0.125" data-bind="attr: { x: X()['-gb/g'] }">-&gamma;&beta;</text>
+								<text y="0" dy="0.125" data-bind="attr: { x: T['-gb/g'] }">-&gamma;&beta;</text>
 							</g>
 						</g>
 					</g>
@@ -228,13 +228,13 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					<g stroke-width="0.0050" stroke-dasharray="0.05 0.03" data-bind="with: cone">
 						<!-- Cones:A -->
 						<g stroke="red" clip-path="url(#graphA-clip)">
-							<line x1="0" x2="-1" data-bind="attr: { y1: Ap().t0_dg, y2: Ap().t1_dg }"></line>
-							<line x1="0" x2="-1" data data-bind="attr: { y1: An().t0_dg, y2: An().t1_dg }"></line>
+							<line x1="0" x2="-1" data-bind="attr: { y1: A.p.t0_dg, y2: A.p.t1_dg }"></line>
+							<line x1="0" x2="-1" data data-bind="attr: { y1: A.n.t0_dg, y2: A.n.t1_dg }"></line>
 						</g>
 						<!-- Cones:B -->
 						<g stroke="blue" clip-path="url(#graphA-clip)">
-							<line x1="0" x2="-1" data data-bind="attr: { y1: Bp().t0_dg, y2: Bp().t1_dg }"></line>
-							<line x1="0" x2="-1" data data-bind="attr: { y1: Bn().t0_dg, y2: Bn().t1_dg }"></line>
+							<line x1="0" x2="-1" data data-bind="attr: { y1: B.p.t0_dg, y2: B.p.t1_dg }"></line>
+							<line x1="0" x2="-1" data data-bind="attr: { y1: B.n.t0_dg, y2: B.n.t1_dg }"></line>
 						</g>
 					</g>
 					<!-- /ko -->
@@ -243,13 +243,13 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					<g stroke-width="0.0035" stroke-dasharray="0.01 0.01" data-bind="with: sync">
 						<!-- Syncs:A -->
 						<g stroke="red" clip-path="url(#graphA-clip)">
-							<line y1="0" y2="1" data-bind="attr: { x1: ARv().x0_dg, x2: ARv().x1_dg }"></line>
-							<line x1="0" x2="-1" data-bind="attr: { y1: ARh().t0_dg, y2: ARh().t1_dg }"></line>
+							<line y1="0" y2="1" data-bind="attr: { x1: A.v.x0_dg, x2: A.v.x1_dg }"></line>
+							<line x1="0" x2="-1" data-bind="attr: { y1: A.h.t0_dg, y2: A.h.t1_dg }"></line>
 						</g>
 						<!-- Syncs:B -->
 						<g stroke="blue" clip-path="url(#graphA-clip)">
-							<line y1="0" y2="1" data-bind="attr: { x1: BRv().x0_dg, x2: BRv().x1_dg }"></line>
-							<line x1="0" x2="-1" data-bind="attr: { y1: BRh().t0_dg, y2: BRh().t1_dg }"></line>
+							<line y1="0" y2="1" data-bind="attr: { x1: B.v.x0_dg, x2: B.v.x1_dg }"></line>
+							<line x1="0" x2="-1" data-bind="attr: { y1: B.h.t0_dg, y2: B.h.t1_dg }"></line>
 						</g>
 					</g>
 					<!-- /ko -->
@@ -258,29 +258,29 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					<g stroke-width="0.0125" data-bind="with: line">
 						<!-- Lines:A -->
 						<g stroke="red">
-							<line data-bind="attr: { x1: A().x0_dg, y1: A().t0_dg, x2: A().x1_dg, y2: A().t1_dg }"></line>
+							<line data-bind="attr: { x1: A.x0_dg, y1: A.t0_dg, x2: A.x1_dg, y2: A.t1_dg }"></line>
 						</g>
 						<!-- Lines:B -->
 						<g stroke="blue">
-							<line data-bind="attr: { x1: B().x0_dg, y1: B().t0_dg, x2: B().x1_dg, y2: B().t1_dg }"></line>
+							<line data-bind="attr: { x1: B.x0_dg, y1: B.t0_dg, x2: B.x1_dg, y2: B.t1_dg }"></line>
 						</g>
 					</g>
 					<!-- /ko -->
 					<!-- Particles -->
 					<!-- ko if: $root.visible.part -->
 					<g stroke-width="0" data-bind="with: part">
-						<!-- Particle:AR -->
-						<circle r="0.045" fill="red" data-bind="attr: { cx: AR().x_dg, cy: AR().t_dg }"></circle>
-						<!-- Particle:BR -->
-						<circle r="0.040" fill="blue" data-bind="attr: { cx: BR().x_dg, cy: BR().t_dg }"></circle>
-						<!-- Particle:BS -->
-						<circle r="0.035" fill="#30b0f0" data-bind="attr: { cx: BS().x_dg, cy: BS().t_dg }"></circle>
-						<!-- Particle:AS -->
-						<circle r="0.030" fill="#ff7f00" data-bind="attr: { cx: AS().x_dg, cy: AS().t_dg }"></circle>
-						<!-- Particle:BA -->
-						<circle r="0.025" fill="#00c800" data-bind="attr: { cx: BA().x_dg, cy: BA().t_dg }"></circle>
-						<!-- Particle:AA -->
-						<circle r="0.020" fill="#ffc800" data-bind="attr: { cx: AA().x_dg, cy: AA().t_dg }"></circle>
+						<!-- Particle:A.act -->
+						<circle r="0.045" fill="red" data-bind="attr: { cx: A.act.x_dg, cy: A.act.t_dg }"></circle>
+						<!-- Particle:B.act -->
+						<circle r="0.040" fill="blue" data-bind="attr: { cx: B.act.x_dg, cy: B.act.t_dg }"></circle>
+						<!-- Particle:B.sim -->
+						<circle r="0.035" fill="#30b0f0" data-bind="attr: { cx: B.sim.x_dg, cy: B.sim.t_dg }"></circle>
+						<!-- Particle:A.sim -->
+						<circle r="0.030" fill="#ff7f00" data-bind="attr: { cx: A.sim.x_dg, cy: A.sim.t_dg }"></circle>
+						<!-- Particle:B.vis -->
+						<circle r="0.025" fill="#00c800" data-bind="attr: { cx: B.vis.x_dg, cy: B.vis.t_dg }"></circle>
+						<!-- Particle:A.vis -->
+						<circle r="0.020" fill="#ffc800" data-bind="attr: { cx: A.vis.x_dg, cy: A.vis.t_dg }"></circle>
 					</g>
 					<!-- /ko -->
 				</g>
@@ -341,7 +341,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 							   data-bind="enable: true, checked: $root.visible.cone">
 						<span>C</span>
 					</label>
-					<label class="check" title="Simultaneities">
+					<label class="check" title="Simultaneity axes">
 						<input class="check" type="checkbox" disabled
 							   data-bind="enable: true, checked: $root.visible.sync">
 						<span>S</span>
@@ -424,118 +424,118 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		<table class="data" data-bind="with: dataB">
 			<caption>Data B</caption>
 			<tr>
-				<th class="title realB">Bob</th>
+				<th class="title B-act">Bob</th>
 				<th class="head">t /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
 				<th class="head">x /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>cT</th>
 				<th class="head">v<sub>t</sub> /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
 				<th class="head">v<sub>x</sub> /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>cT</th>
 			</tr>
-			<!-- Part:BR -->
-			<tr class="realB">
-				<th class="name">B<sub>real</sub></th>
-				<td class="value"><span data-bind="text: BR().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BR().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BR().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BR().VX.toFixed($root.precision)"></span></td>
+			<!-- Part:B.act -->
+			<tr class="B-act">
+				<th class="name">B<sub>act</sub></th>
+				<td class="value"><span data-bind="text: B.act().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.act().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.act().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.act().VX.toFixed($root.precision)"></span></td>
 			</tr>
-			<!-- Part:BS -->
-			<tr class="simB">
+			<!-- Part:B.sim -->
+			<tr class="B-sim">
 				<th class="name">B<sub>sim</sub></th>
-				<td class="value"><span data-bind="text: BS().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BS().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BS().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BS().VX.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.sim().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.sim().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.sim().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.sim().VX.toFixed($root.precision)"></span></td>
 			</tr>
-			<!-- Part:BA -->
-			<tr class="appB">
-				<th class="name">B<sub>app</sub></th>
-				<td class="value"><span data-bind="text: BA().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BA().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BA().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BA().VX.toFixed($root.precision)"></span></td>
+			<!-- Part:B.vis -->
+			<tr class="B-vis">
+				<th class="name">B<sub>vis</sub></th>
+				<td class="value"><span data-bind="text: B.vis().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.vis().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.vis().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.vis().VX.toFixed($root.precision)"></span></td>
 			</tr>
-			<!-- Part:AR -->
-			<tr class="realA">
-				<th class="name">A<sub>real</sub></th>
-				<td class="value"><span data-bind="text: AR().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AR().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AR().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AR().VX.toFixed($root.precision)"></span></td>
+			<!-- Part:A.act -->
+			<tr class="A-act">
+				<th class="name">A<sub>act</sub></th>
+				<td class="value"><span data-bind="text: A.act().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.act().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.act().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.act().VX.toFixed($root.precision)"></span></td>
 			</tr>
-			<!-- Part:AS -->
-			<tr class="simA">
+			<!-- Part:A.sim -->
+			<tr class="A-sim">
 				<th class="name">A<sub>sim</sub></th>
-				<td class="value"><span data-bind="text: AS().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AS().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AS().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AS().VX.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.sim().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.sim().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.sim().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.sim().VX.toFixed($root.precision)"></span></td>
 			</tr>
-			<!-- Part:AA -->
-			<tr class="appA">
-				<th class="name">A<sub>app</sub></th>
-				<td class="value"><span data-bind="text: AA().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AA().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AA().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AA().VX.toFixed($root.precision)"></span></td>
+			<!-- Part:A.vis -->
+			<tr class="A-vis">
+				<th class="name">A<sub>vis</sub></th>
+				<td class="value"><span data-bind="text: A.vis().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.vis().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.vis().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.vis().VX.toFixed($root.precision)"></span></td>
 			</tr>
 		</table>
 
 		<table class="data" data-bind="with: dataA">
 			<caption>Data A</caption>
 			<tr>
-				<th class="title realA">Alice</th>
+				<th class="title A-act">Alice</th>
 				<th class="head">t' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
 				<th class="head">x' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>cT</th>
 				<th class="head">v<sub>t</sub>' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
 				<th class="head">v<sub>x</sub>' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>cT</th>
 			</tr>
-			<!-- Part:AR -->
-			<tr class="realA">
-				<th class="name">A<sub>real</sub></th>
-				<td class="value"><span data-bind="text: AR().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AR().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AR().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AR().VX.toFixed($root.precision)"></span></td>
+			<!-- Part:A.act -->
+			<tr class="A-act">
+				<th class="name">A<sub>act</sub></th>
+				<td class="value"><span data-bind="text: A.act().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.act().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.act().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.act().VX.toFixed($root.precision)"></span></td>
 			</tr>
-			<!-- Part:AS -->
-			<tr class="simA">
+			<!-- Part:A.sim -->
+			<tr class="A-sim">
 				<th class="name">A<sub>sim</sub></th>
-				<td class="value"><span data-bind="text: AS().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AS().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AS().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AS().VX.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.sim().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.sim().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.sim().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.sim().VX.toFixed($root.precision)"></span></td>
 			</tr>
-			<!-- Part:AA -->
-			<tr class="appA">
-				<th class="name">A<sub>app</sub></th>
-				<td class="value"><span data-bind="text: AA().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AA().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AA().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: AA().VX.toFixed($root.precision)"></span></td>
+			<!-- Part:A.vis -->
+			<tr class="A-vis">
+				<th class="name">A<sub>vis</sub></th>
+				<td class="value"><span data-bind="text: A.vis().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.vis().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.vis().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: A.vis().VX.toFixed($root.precision)"></span></td>
 			</tr>
-			<!-- Part:BR -->
-			<tr class="realB">
-				<th class="name">B<sub>real</sub></th>
-				<td class="value"><span data-bind="text: BR().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BR().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BR().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BR().VX.toFixed($root.precision)"></span></td>
+			<!-- Part:B.act() -->
+			<tr class="B-act">
+				<th class="name">B<sub>act</sub></th>
+				<td class="value"><span data-bind="text: B.act().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.act().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.act().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.act().VX.toFixed($root.precision)"></span></td>
 			</tr>
-			<!-- Part:BS -->
-			<tr class="simB">
+			<!-- Part:B.sim -->
+			<tr class="B-sim">
 				<th class="name">B<sub>sim</sub></th>
-				<td class="value"><span data-bind="text: BS().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BS().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BS().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BS().VX.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.sim().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.sim().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.sim().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.sim().VX.toFixed($root.precision)"></span></td>
 			</tr>
-			<!-- Part:BA -->
-			<tr class="appB">
-				<th class="name">B<sub>app</sub></th>
-				<td class="value"><span data-bind="text: BA().T.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BA().X.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BA().VT.toFixed($root.precision)"></span></td>
-				<td class="value"><span data-bind="text: BA().VX.toFixed($root.precision)"></span></td>
+			<!-- Part:B.vis -->
+			<tr class="B-vis">
+				<th class="name">B<sub>vis</sub></th>
+				<td class="value"><span data-bind="text: B.vis().T.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.vis().X.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.vis().VT.toFixed($root.precision)"></span></td>
+				<td class="value"><span data-bind="text: B.vis().VX.toFixed($root.precision)"></span></td>
 			</tr>
 		</table>
 	</div>

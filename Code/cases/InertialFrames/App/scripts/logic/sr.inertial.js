@@ -16,32 +16,253 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	// requires:
 	var $Math = $global["nan"].common.Math;
 
-	function Calc() {
-		// For b in [0,1] (mod 1):    // speed
-		// For t in [0,1] (mod 1):    // time (proper)
+	// For b in [0,1] (mod 1)  // frame speed ("beta")
+	// For t in [0,1] (mod 1)  // proper time ("tau")
+	// 
+	// Let t in [0,g]  // coordinate time
+	// Let x in [-g,g]
+	// Let v in [-1,1]
 
-		// Let t in [0,g]:
-		// Let x in [0,g]:
+	/**
+	 * Reference constructors: computed on speed.
+	 * 
+	 * @constructor
+	 * @param {number} _b
+	 */
+	function Logic(_b) {
+		var _g = $Math.gamma(_b);
+		var _1d1pb = 1 / (1 + _b);
 
-		var self = this;
+		function Part(f, b, p) {
+			// t(tau) = f * tau * g^p
+			// x(tau) = f*b * tau * g^p
+			this.St = (t) => new $Math.Scalar(f * t, _g, p);
+			this.Sx = (t) => new $Math.Scalar(f * b * t, _g, p);
+			this.Svt = () => new $Math.Scalar(f, _g, p);
+			this.Svx = () => new $Math.Scalar(f * b, _g, p);
+		}
 
-		var _b, _g, _1d1pb, _t;
+		function Sync() {
+			// t(v, x, ct, cx) = ct + v(x - cx)
+			// x(v, t, ct, cx) = cx + v(t - ct)
+			this.h_t = (v, x, ct, cx) => ct + v * (x - cx);
+			this.v_x = (v, t, ct, cx) => cx + v * (t - ct);
+		}
+
+		function Cone() {
+			// t(x, ct, cx) = ct - cx + x
+			// t(x, ct, cx) = ct + cx - x
+			this.p_t = (x, ct, cx) => ct - cx + x;
+			this.n_t = (x, ct, cx) => ct + cx - x;
+		}
+
+		this.partB = {
+			B: {
+				// tBA(tau) := tau
+				// xBA(tau) := 0
+				act: new Part(1, 0, 0),
+				// tBS(tau) := tBA(tau/g) = tau/g
+				// xBS(tau) := xBA(tau/g) = 0
+				sim: new Part(1, 0, -1),
+				// tBV(tau) := tBA(tau/(g(1+b))) = tau/(g(1+b))
+				// xBV(tau) := xBA(tau/(g(1+b))) = 0
+				vis: new Part(_1d1pb, 0, -1)
+			},
+			A: {
+				// tAA(tau) := g*tau
+				// xAA(tau) := gb*tau
+				act: new Part(1, _b, 1),
+				// tAS(tau) := tAA(tau/g) = tau
+				// xAS(tau) := xAA(tau/g) = b*tau
+				sim: new Part(1, _b, 0),
+				// tAV(tau) := tAA(tau/(g(1+b))) = tau/(1+b)
+				// xAV(tau) := xAA(tau/(g(1+b))) = b*tau/(1+b)
+				vis: new Part(_1d1pb, _b, 0)
+			}
+		};
+
+		this.sync = new Sync();
+		this.cone = new Cone();
+	}
+
+	/**
+	 * Particle B reference elements: computed on time.
+	 * 
+	 * @constructor
+	 * @param {Logic} _logic
+	 * @param {number} _t
+	 */
+	function Logic_PartB(_logic, _t) {
+		return ["B", "A"].reduce((partB, pk1) => {
+			partB[pk1] = ["act", "sim", "vis"].reduce((part, pk2) => {
+				part[pk2] = {
+					St: _logic.partB[pk1][pk2].St(_t),
+					Sx: _logic.partB[pk1][pk2].Sx(_t),
+					Svt: _logic.partB[pk1][pk2].Svt(),
+					Svx: _logic.partB[pk1][pk2].Svx()
+				};
+
+				return part;
+			}, {});
+
+			return partB;
+		}, {});
+	}
+
+	/**
+	 * Frame B elements computed on speed.
+	 * 
+	 * @constructor
+	 * @param {Logic} _logic
+	 * @param {number} _b
+	 */
+	function FrameB_forSpeed(_logic, _b) {
+		var _g = $Math.gamma(_b);
+
+		this.grid = {
+			T: {
+				"gb/g": new $Math.Scalar(_b, _g, 1).val(-1)
+			},
+			X: {
+				"1/g": new $Math.Scalar(1, _g, 0).val(-1)
+			}
+		};
+
+		this.line = {
+			B: {
+				t0_dg: _logic.partB.B.act.St(0).val(-1),
+				t1_dg: _logic.partB.B.act.St(1).val(-1),
+				x0_dg: _logic.partB.B.act.Sx(0).val(-1),
+				x1_dg: _logic.partB.B.act.Sx(1).val(-1)
+			},
+			A: {
+				t0_dg: _logic.partB.A.act.St(0).val(-1),
+				t1_dg: _logic.partB.A.act.St(1).val(-1),
+				x0_dg: _logic.partB.A.act.Sx(0).val(-1),
+				x1_dg: _logic.partB.A.act.Sx(1).val(-1)
+			}
+		};
+	}
+
+	/**
+	 * Frame B elements computed on time.
+	 * 
+	 * @constructor
+	 * @param {Logic} _logic
+	 * @param {number} _b
+	 * @param {number} _t
+	 */
+	function FrameB_forTime(_logic, _b, _t) {
+		function _Part(part) {
+			return {
+				t: part.St.val(0),
+				x: part.Sx.val(0),
+				vt: part.Svt.val(0),
+				vx: part.Svx.val(0),
+
+				t_dg: part.St.val(-1),
+				x_dg: part.Sx.val(-1),
+				vt_dg: part.Svt.val(-1),
+				vx_dg: part.Svx.val(-1)
+			};
+		}
+
+		/** @type {*} */
+		var _part = new Logic_PartB(_logic, _t);
+
+		var _Ba = {
+			t_dg: _part.B.act.St.val(-1),
+			x_dg: _part.B.act.Sx.val(-1)
+		};
+
+		var _Aa = {
+			t_dg: _part.A.act.St.val(-1),
+			x_dg: _part.A.act.Sx.val(-1)
+		};
+
+		this.part = {
+			B: {
+				act: _Part(_part.B.act),
+				sim: _Part(_part.B.sim),
+				vis: _Part(_part.B.vis)
+			},
+			A: {
+				act: _Part(_part.A.act),
+				sim: _Part(_part.A.sim),
+				vis: _Part(_part.A.vis)
+			},
+		};
+
+		this.sync = {
+			B: {
+				v: {
+					x0_dg: _logic.sync.v_x(0, 0, _Ba.t_dg, _Ba.x_dg),
+					x1_dg: _logic.sync.v_x(0, 1, _Ba.t_dg, _Ba.x_dg)
+				},
+				h: {
+					t0_dg: _logic.sync.h_t(0, 0, _Ba.t_dg, _Ba.x_dg),
+					t1_dg: _logic.sync.h_t(0, 1, _Ba.t_dg, _Ba.x_dg)
+				},
+			},
+			A: {
+				v: {
+					x0_dg: _logic.sync.v_x(_b, 0, _Aa.t_dg, _Aa.x_dg),
+					x1_dg: _logic.sync.v_x(_b, 1, _Aa.t_dg, _Aa.x_dg)
+				},
+				h: {
+					t0_dg: _logic.sync.h_t(_b, 0, _Aa.t_dg, _Aa.x_dg),
+					t1_dg: _logic.sync.h_t(_b, 1, _Aa.t_dg, _Aa.x_dg)
+				},
+			}
+		};
+
+		this.cone = {
+			B: {
+				p: {
+					t0_dg: _logic.cone.p_t(0, _Ba.t_dg, _Ba.x_dg),
+					t1_dg: _logic.cone.p_t(1, _Ba.t_dg, _Ba.x_dg)
+				},
+				n: {
+					t0_dg: _logic.cone.n_t(0, _Ba.t_dg, _Ba.x_dg),
+					t1_dg: _logic.cone.n_t(1, _Ba.t_dg, _Ba.x_dg)
+				}
+			},
+			A: {
+				p: {
+					t0_dg: _logic.cone.p_t(0, _Aa.t_dg, _Aa.x_dg),
+					t1_dg: _logic.cone.p_t(1, _Aa.t_dg, _Aa.x_dg)
+				},
+				n: {
+					t0_dg: _logic.cone.n_t(0, _Aa.t_dg, _Aa.x_dg),
+					t1_dg: _logic.cone.n_t(1, _Aa.t_dg, _Aa.x_dg)
+				}
+			}
+		};
+	}
+
+	/**
+	 * Diagram logic.
+	 * 
+	 * @constructor
+	 */
+	function Diagram() {
+		/** @type {Logic} */
+		var _logic;
+
+		var _b, _t;
 
 		this.setSpeed = function (b) {
 			_b = $Math.cmod(b, 1);
 
-			_g = $Math.gamma(_b);
-			_1d1pb = 1 / (1 + _b);
+			_logic = new Logic(_b);
 
-			// START: Keep order!
+			var frameB = new FrameB_forSpeed(_logic, _b);
 
-			self.frameB.grid._onSpeed();
-			self.frameA.grid._onSpeed();
+			this.frameB.grid._onSpeed(frameB);
+			this.frameA.grid._onSpeed(frameB);
 
-			self.frameB.line._onSpeed();
-			self.frameA.line._onSpeed();
-
-			// END: Keep order!
+			this.frameB.line._onSpeed(frameB);
+			this.frameA.line._onSpeed(frameB);
 
 			return _b;
 		};
@@ -49,240 +270,64 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		this.setTime = function (t) {
 			_t = $Math.cmod(t, 1);
 
-			// START: Keep order!
+			var frameB = new FrameB_forTime(_logic, _b, _t);
 
-			self.frameB._part._onTime();
+			this.frameB.part._onTime(frameB);
+			this.frameA.part._onTime(frameB);
 
-			self.frameB.part._onTime();
-			self.frameA.part._onTime();
+			this.frameB.sync._onTime(frameB);
+			this.frameA.sync._onTime(frameB);
 
-			self.frameB.cone._onTime();
-			self.frameA.cone._onTime();
-
-			self.frameB.sync._onTime();
-			self.frameA.sync._onTime();
-
-			// END: Keep order!
+			this.frameB.cone._onTime(frameB);
+			this.frameA.cone._onTime(frameB);
 
 			return _t;
 		};
 
-		var _pRealB = {
-			// tBR(t) = t, xBR(t) = 0
-			BR_t: function (t) { return new $Math.Scalar(t, _g, 0); },
-			BR_x: function (t) { return new $Math.Scalar(0, _g, 0); },
-			BR_vt: function () { return new $Math.Scalar(1, _g, 0); },
-			BR_vx: function () { return new $Math.Scalar(0, _g, 0); },
-
-			// tAR(t) = gt, xAR(t) = gbt
-			AR_t: function (t) { return new $Math.Scalar(t, _g, 1); },
-			AR_x: function (t) { return new $Math.Scalar(_b * t, _g, 1); },
-			AR_vt: function () { return new $Math.Scalar(1, _g, 1); },
-			AR_vx: function () { return new $Math.Scalar(_b, _g, 1); }
-		};
-
-		var _pSimB = {
-			// tAS(t) = tAR(t/g) = t, xAS(t) = xAR(t/g) = bt
-			AS_t: function (t) { return new $Math.Scalar(t, _g, 0); },
-			AS_x: function (t) { return new $Math.Scalar(_b * t, _g, 0); },
-			AS_vt: function () { return new $Math.Scalar(1, _g, 0); },
-			AS_vx: function () { return new $Math.Scalar(_b, _g, 0); },
-
-			// tBS(t) = tBR(t/g) = t/g, xBS(t) = xBR(t/g) = 0
-			BS_t: function (t) { return new $Math.Scalar(t, _g, -1); },
-			BS_x: function (t) { return new $Math.Scalar(0, _g, -1); },
-			BS_vt: function () { return new $Math.Scalar(1, _g, -1); },
-			BS_vx: function () { return new $Math.Scalar(0, _g, -1); }
-		};
-
-		var _pAppB = {
-			// tAA(t) = tAR(t/(g(1+b))) = t/(1+b), xAA(t) = xAR(t/(g(1+b))) = bt/(1+b)
-			AA_t: function (t) { return new $Math.Scalar(_1d1pb * t, _g, 0); },
-			AA_x: function (t) { return new $Math.Scalar(_1d1pb * _b * t, _g, 0); },
-			AA_vt: function () { return new $Math.Scalar(_1d1pb, _g, 0); },
-			AA_vx: function () { return new $Math.Scalar(_1d1pb * _b, _g, 0); },
-
-			// tBA(t) = tBR(t/(g(1+b))) = t/(g(1+b)), xBA(t) = xBR(t/(g(1+b))) = 0
-			BA_t: function (t) { return new $Math.Scalar(_1d1pb * t, _g, -1); },
-			BA_x: function (t) { return new $Math.Scalar(0, _g, -1); },
-			BA_vt: function () { return new $Math.Scalar(_1d1pb, _g, -1); },
-			BA_vx: function () { return new $Math.Scalar(0, _g, -1); }
-		};
-
-		var _cone = {
-			// t = ct - cx + x
-			p_t: function (x, ct, cx) { return ct - cx + x; },
-			// t = ct + cx - x
-			n_t: function (x, ct, cx) { return ct + cx - x; }
-		};
-
-		var _sync = {
-			// t = ct + v(x - cx)
-			h_t: function (v, x, ct, cx) { return ct + v * (x - cx); },
-			// x = cx + v(t - ct)
-			v_x: function (v, t, ct, cx) { return cx + v * (t - ct); }
-		};
-
 		this.frameB = {
-			_part: {
-				BR: {}, AR: {}, AS: {}, BS: {}, AA: {}, BA: {},
-				_onTime: function () {
-					this.BR.t = _pRealB.BR_t(_t);
-					this.BR.x = _pRealB.BR_x(_t);
-					this.BR.vt = _pRealB.BR_vt();
-					this.BR.vx = _pRealB.BR_vx();
-
-					this.AR.t = _pRealB.AR_t(_t);
-					this.AR.x = _pRealB.AR_x(_t);
-					this.AR.vt = _pRealB.AR_vt();
-					this.AR.vx = _pRealB.AR_vx();
-
-					this.AS.t = _pSimB.AS_t(_t);
-					this.AS.x = _pSimB.AS_x(_t);
-					this.AS.vt = _pSimB.AS_vt();
-					this.AS.vx = _pSimB.AS_vx();
-
-					this.BS.t = _pSimB.BS_t(_t);
-					this.BS.x = _pSimB.BS_x(_t);
-					this.BS.vt = _pSimB.BS_vt();
-					this.BS.vx = _pSimB.BS_vx();
-
-					this.AA.t = _pAppB.AA_t(_t);
-					this.AA.x = _pAppB.AA_x(_t);
-					this.AA.vt = _pAppB.AA_vt();
-					this.AA.vx = _pAppB.AA_vx();
-
-					this.BA.t = _pAppB.BA_t(_t);
-					this.BA.x = _pAppB.BA_x(_t);
-					this.BA.vt = _pAppB.BA_vt();
-					this.BA.vx = _pAppB.BA_vx();
-				}
-			},
 			grid: {
 				T: {}, X: {},
-				_onSpeed: function () {
-					this.T["1/g"] = 1 / _g;
 
-					this.X["gb/g"] = _b;
+				_onSpeed: function (/** @type {FrameB_forSpeed} */ frameB) {
+					this.T = frameB.grid.T;
+
+					this.X = frameB.grid.X;
 				}
 			},
 			line: {
 				B: {}, A: {},
-				_onSpeed: function () {
-					this.B.t0_dg = _pRealB.BR_t(0).val(-1);
-					this.B.t1_dg = _pRealB.BR_t(1).val(-1);
-					this.B.x0_dg = _pRealB.BR_x(0).val(-1);
-					this.B.x1_dg = _pRealB.BR_x(1).val(-1);
 
-					this.A.t0_dg = _pRealB.AR_t(0).val(-1);
-					this.A.t1_dg = _pRealB.AR_t(1).val(-1);
-					this.A.x0_dg = _pRealB.AR_x(0).val(-1);
-					this.A.x1_dg = _pRealB.AR_x(1).val(-1);
+				_onSpeed: function (/** @type {FrameB_forSpeed} */ frameB) {
+					this.B = frameB.line.B;
+
+					this.A = frameB.line.A;
 				}
 			},
 			part: {
-				BR: {}, AR: {}, AS: {}, BS: {}, AA: {}, BA: {},
-				_onTime: function () {
-					var _BR = self.frameB._part.BR,
-						_AR = self.frameB._part.AR,
-						_AS = self.frameB._part.AS,
-						_BS = self.frameB._part.BS,
-						_AA = self.frameB._part.AA,
-						_BA = self.frameB._part.BA;
+				B: {}, A: {},
 
-					this.BR.t = _BR.t.val(0);
-					this.BR.x = _BR.x.val(0);
-					this.BR.vt = _BR.vt.val(0);
-					this.BR.vx = _BR.vx.val(0);
+				_onTime: function (/** @type {FrameB_forTime} */ frameB) {
+					this.B = frameB.part.B;
 
-					this.AR.t = _AR.t.val(0);
-					this.AR.x = _AR.x.val(0);
-					this.AR.vt = _AR.vt.val(0);
-					this.AR.vx = _AR.vx.val(0);
-
-					this.AS.t = _AS.t.val(0);
-					this.AS.x = _AS.x.val(0);
-					this.AS.vt = _AS.vt.val(0);
-					this.AS.vx = _AS.vx.val(0);
-
-					this.BS.t = _BS.t.val(0);
-					this.BS.x = _BS.x.val(0);
-					this.BS.vt = _BS.vt.val(0);
-					this.BS.vx = _BS.vx.val(0);
-
-					this.AA.t = _AA.t.val(0);
-					this.AA.x = _AA.x.val(0);
-					this.AA.vt = _AA.vt.val(0);
-					this.AA.vx = _AA.vx.val(0);
-
-					this.BA.t = _BA.t.val(0);
-					this.BA.x = _BA.x.val(0);
-					this.BA.vt = _BA.vt.val(0);
-					this.BA.vx = _BA.vx.val(0);
-
-					this.BR.t_dg = _BR.t.val(-1);
-					this.BR.x_dg = _BR.x.val(-1);
-					this.BR.vt_dg = _BR.vt.val(-1);
-					this.BR.vx_dg = _BR.vx.val(-1);
-
-					this.AR.t_dg = _AR.t.val(-1);
-					this.AR.x_dg = _AR.x.val(-1);
-					this.AR.vt_dg = _AR.vt.val(-1);
-					this.AR.vx_dg = _AR.vx.val(-1);
-
-					this.AS.t_dg = _AS.t.val(-1);
-					this.AS.x_dg = _AS.x.val(-1);
-					this.AS.vt_dg = _AS.vt.val(-1);
-					this.AS.vx_dg = _AS.vx.val(-1);
-
-					this.BS.t_dg = _BS.t.val(-1);
-					this.BS.x_dg = _BS.x.val(-1);
-					this.BS.vt_dg = _BS.vt.val(-1);
-					this.BS.vx_dg = _BS.vx.val(-1);
-
-					this.AA.t_dg = _AA.t.val(-1);
-					this.AA.x_dg = _AA.x.val(-1);
-					this.AA.vt_dg = _AA.vt.val(-1);
-					this.AA.vx_dg = _AA.vx.val(-1);
-
-					this.BA.t_dg = _BA.t.val(-1);
-					this.BA.x_dg = _BA.x.val(-1);
-					this.BA.vt_dg = _BA.vt.val(-1);
-					this.BA.vx_dg = _BA.vx.val(-1);
-				}
-			},
-			cone: {
-				Bp: {}, Bn: {}, Ap: {}, An: {},
-				_onTime: function () {
-					var _BR = self.frameB.part.BR,
-						_AR = self.frameB.part.AR;
-
-					this.Bp.t0_dg = _cone.p_t(0, _BR.t_dg, _BR.x_dg);
-					this.Bp.t1_dg = _cone.p_t(1, _BR.t_dg, _BR.x_dg);
-					this.Bn.t0_dg = _cone.n_t(0, _BR.t_dg, _BR.x_dg);
-					this.Bn.t1_dg = _cone.n_t(1, _BR.t_dg, _BR.x_dg);
-
-					this.Ap.t0_dg = _cone.p_t(0, _AR.t_dg, _AR.x_dg);
-					this.Ap.t1_dg = _cone.p_t(1, _AR.t_dg, _AR.x_dg);
-					this.An.t0_dg = _cone.n_t(0, _AR.t_dg, _AR.x_dg);
-					this.An.t1_dg = _cone.n_t(1, _AR.t_dg, _AR.x_dg);
+					this.A = frameB.part.A;
 				}
 			},
 			sync: {
-				BRv: {}, BRh: {}, ARv: {}, ARh: {},
-				_onTime: function () {
-					var _BR = self.frameB.part.BR,
-						_AR = self.frameB.part.AR;
+				B: {}, A: {},
 
-					this.BRh.t0_dg = _sync.h_t(0, 0, _BR.t_dg, _BR.x_dg);
-					this.BRh.t1_dg = _sync.h_t(0, 1, _BR.t_dg, _BR.x_dg);
-					this.BRv.x0_dg = _sync.v_x(0, 0, _BR.t_dg, _BR.x_dg);
-					this.BRv.x1_dg = _sync.v_x(0, 1, _BR.t_dg, _BR.x_dg);
+				_onTime: function (/** @type {FrameB_forTime} */ frameB) {
+					this.B = frameB.sync.B;
 
-					this.ARh.t0_dg = _sync.h_t(_b, 0, _AR.t_dg, _AR.x_dg);
-					this.ARh.t1_dg = _sync.h_t(_b, 1, _AR.t_dg, _AR.x_dg);
-					this.ARv.x0_dg = _sync.v_x(_b, 0, _AR.t_dg, _AR.x_dg);
-					this.ARv.x1_dg = _sync.v_x(_b, 1, _AR.t_dg, _AR.x_dg);
+					this.A = frameB.sync.A;
+				}
+			},
+			cone: {
+				B: {}, A: {},
+
+				_onTime: function (/** @type {FrameB_forTime} */ frameB) {
+					this.B = frameB.cone.B;
+
+					this.A = frameB.cone.A;
 				}
 			}
 		};
@@ -290,135 +335,78 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		this.frameA = {
 			grid: {
 				T: {}, X: {},
-				_onSpeed: function () {
-					var _T = self.frameB.grid.T,
-						_X = self.frameB.grid.X;
 
-					this.T["1/g"] = _T["1/g"];
+				_onSpeed: function (/** @type {FrameB_forSpeed} */ frameB) {
+					this.T["-gb/g"] = -frameB.grid.T["gb/g"];
 
-					this.X["-gb/g"] = -_X["gb/g"];
+					this.X["1/g"] = frameB.grid.X["1/g"];
 				}
 			},
 			line: {
 				A: {}, B: {},
-				_onSpeed: function () {
-					var _B = self.frameB.line.B,
-						_A = self.frameB.line.A;
 
-					this.A.t0_dg = _B.t0_dg;
-					this.A.t1_dg = _B.t1_dg;
-					this.A.x0_dg = -_B.x0_dg;
-					this.A.x1_dg = -_B.x1_dg;
+				_onSpeed: function (/** @type {FrameB_forSpeed} */ frameB) {
+					this.A.t0_dg = frameB.line.B.t0_dg;
+					this.A.t1_dg = frameB.line.B.t1_dg;
+					this.A.x0_dg = -frameB.line.B.x0_dg;
+					this.A.x1_dg = -frameB.line.B.x1_dg;
 
-					this.B.t0_dg = _A.t0_dg;
-					this.B.t1_dg = _A.t1_dg;
-					this.B.x0_dg = -_A.x0_dg;
-					this.B.x1_dg = -_A.x1_dg;
+					this.B.t0_dg = frameB.line.A.t0_dg;
+					this.B.t1_dg = frameB.line.A.t1_dg;
+					this.B.x0_dg = -frameB.line.A.x0_dg;
+					this.B.x1_dg = -frameB.line.A.x1_dg;
 				}
 			},
 			part: {
-				AR: {}, BR: {}, BS: {}, AS: {}, BA: {}, AA: {},
-				_onTime: function () {
-					var _BR = self.frameB.part.BR,
-						_AR = self.frameB.part.AR,
-						_AS = self.frameB.part.AS,
-						_BS = self.frameB.part.BS,
-						_AA = self.frameB.part.AA,
-						_BA = self.frameB.part.BA;
+				A: {}, B: {},
 
-					this.AR.t = _BR.t;
-					this.AR.x = -_BR.x;
-					this.AR.vt = _BR.vt;
-					this.AR.vx = -_BR.vx;
+				_onTime: function (/** @type {FrameB_forTime} */ frameB) {
+					function _Part(part) {
+						return {
+							t: part.t,
+							x: -part.x,
+							vt: part.vt,
+							vx: -part.vx,
 
-					this.BR.t = _AR.t;
-					this.BR.x = -_AR.x;
-					this.BR.vt = _AR.vt;
-					this.BR.vx = -_AR.vx;
+							t_dg: part.t_dg,
+							x_dg: -part.x_dg,
+							vt_dg: part.vt_dg,
+							vx_dg: -part.vx_dg
+						};
+					}
 
-					this.BS.t = _AS.t;
-					this.BS.x = -_AS.x;
-					this.BS.vt = _AS.vt;
-					this.BS.vx = -_AS.vx;
+					this.A.act = _Part(frameB.part.B.act);
+					this.B.act = _Part(frameB.part.A.act);
 
-					this.AS.t = _BS.t;
-					this.AS.x = -_BS.x;
-					this.AS.vt = _BS.vt;
-					this.AS.vx = -_BS.vx;
+					this.B.sim = _Part(frameB.part.A.sim);
+					this.A.sim = _Part(frameB.part.B.sim);
 
-					this.BA.t = _AA.t;
-					this.BA.x = -_AA.x;
-					this.BA.vt = _AA.vt;
-					this.BA.vx = -_AA.vx;
-
-					this.AA.t = _BA.t;
-					this.AA.x = -_BA.x;
-					this.AA.vt = _BA.vt;
-					this.AA.vx = -_BA.vx;
-
-					this.AR.t_dg = _BR.t_dg;
-					this.AR.x_dg = -_BR.x_dg;
-					this.AR.vt_dg = _BR.vt_dg;
-					this.AR.vx_dg = -_BR.vx_dg;
-
-					this.BR.t_dg = _AR.t_dg;
-					this.BR.x_dg = -_AR.x_dg;
-					this.BR.vt_dg = _AR.vt_dg;
-					this.BR.vx_dg = -_AR.vx_dg;
-
-					this.BS.t_dg = _AS.t_dg;
-					this.BS.x_dg = -_AS.x_dg;
-					this.BS.vt_dg = _AS.vt_dg;
-					this.BS.vx_dg = -_AS.vx_dg;
-
-					this.AS.t_dg = _BS.t_dg;
-					this.AS.x_dg = -_BS.x_dg;
-					this.AS.vt_dg = _BS.vt_dg;
-					this.AS.vx_dg = -_BS.vx_dg;
-
-					this.BA.t_dg = _AA.t_dg;
-					this.BA.x_dg = -_AA.x_dg;
-					this.BA.vt_dg = _AA.vt_dg;
-					this.BA.vx_dg = -_AA.vx_dg;
-
-					this.AA.t_dg = _BA.t_dg;
-					this.AA.x_dg = -_BA.x_dg;
-					this.AA.vt_dg = _BA.vt_dg;
-					this.AA.vx_dg = -_BA.vx_dg;
-				}
-			},
-			cone: {
-				Ap: {}, An: {}, Bp: {}, Bn: {},
-				_onTime: function () {
-					var _AR = self.frameA.part.AR,
-						_BR = self.frameA.part.BR;
-
-					this.Ap.t0_dg = _cone.p_t(0, _AR.t_dg, _AR.x_dg);
-					this.Ap.t1_dg = _cone.p_t(-1, _AR.t_dg, _AR.x_dg);
-					this.An.t0_dg = _cone.n_t(0, _AR.t_dg, _AR.x_dg);
-					this.An.t1_dg = _cone.n_t(-1, _AR.t_dg, _AR.x_dg);
-
-					this.Bp.t0_dg = _cone.p_t(0, _BR.t_dg, _BR.x_dg);
-					this.Bp.t1_dg = _cone.p_t(-1, _BR.t_dg, _BR.x_dg);
-					this.Bn.t0_dg = _cone.n_t(0, _BR.t_dg, _BR.x_dg);
-					this.Bn.t1_dg = _cone.n_t(-1, _BR.t_dg, _BR.x_dg);
+					this.B.vis = _Part(frameB.part.A.vis);
+					this.A.vis = _Part(frameB.part.B.vis);
 				}
 			},
 			sync: {
-				ARv: {}, ARh: {}, BRv: {}, BRh: {},
-				_onTime: function () {
-					var _AR = self.frameA.part.AR,
-						_BR = self.frameA.part.BR;
+				A: { h: {}, v: {} }, B: { h: {}, v: {} },
 
-					this.ARh.t0_dg = _sync.h_t(0, 0, _AR.t_dg, _AR.x_dg);
-					this.ARh.t1_dg = _sync.h_t(0, -1, _AR.t_dg, _AR.x_dg);
-					this.ARv.x0_dg = _sync.v_x(0, 0, _AR.t_dg, _AR.x_dg);
-					this.ARv.x1_dg = _sync.v_x(0, 1, _AR.t_dg, _AR.x_dg);
+				_onTime: function (/** @type {FrameB_forTime} */ frameB) {
+					this.A.h.t0_dg = frameB.sync.B.h.t0_dg;
+					this.A.h.t1_dg = frameB.sync.B.h.t1_dg;
+					this.A.v.x0_dg = -frameB.sync.B.v.x0_dg;
+					this.A.v.x1_dg = -frameB.sync.B.v.x1_dg;
 
-					this.BRh.t0_dg = _sync.h_t(-_b, 0, _BR.t_dg, _BR.x_dg);
-					this.BRh.t1_dg = _sync.h_t(-_b, -1, _BR.t_dg, _BR.x_dg);
-					this.BRv.x0_dg = _sync.v_x(-_b, 0, _BR.t_dg, _BR.x_dg);
-					this.BRv.x1_dg = _sync.v_x(-_b, 1, _BR.t_dg, _BR.x_dg);
+					this.B.h.t0_dg = frameB.sync.A.h.t0_dg;
+					this.B.h.t1_dg = frameB.sync.A.h.t1_dg;
+					this.B.v.x0_dg = -frameB.sync.A.v.x0_dg;
+					this.B.v.x1_dg = -frameB.sync.A.v.x1_dg;
+				}
+			},
+			cone: {
+				A: {}, B: {},
+
+				_onTime: function (/** @type {FrameB_forTime} */ frameB) {
+					this.A = frameB.cone.B;
+
+					this.B = frameB.cone.A;
 				}
 			}
 		};
@@ -429,26 +417,26 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	function Inertial(onSpeed, onTime) {
 		var _b, _t;
 
-		var _calc = new Calc();
+		var _diag = new Diagram();
 
 		function setSpeed(b, t) {
-			_b = _calc.setSpeed(b);
+			_b = _diag.setSpeed(b);
 
 			setTime(t);
 		}
 
 		function setTime(t) {
-			_t = _calc.setTime(t);
+			_t = _diag.setTime(t);
 		}
 
 		this.CYCLE_TIME = 1;
 		this.gamma = $Math.gamma;
 
-		this.speed = function () { return _b; };
-		this.time = function () { return _t; };
+		this.speed = () => _b;
+		this.time = () => _t;
 
-		this.frameB = _calc.frameB;
-		this.frameA = _calc.frameA;
+		this.frameB = _diag.frameB;
+		this.frameA = _diag.frameA;
 
 		this.setSpeed = function (b) {
 			setSpeed(b, _t);

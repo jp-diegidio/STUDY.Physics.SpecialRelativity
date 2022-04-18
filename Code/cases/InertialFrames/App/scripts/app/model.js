@@ -17,14 +17,14 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		var _grid = new $ko.observable(),
 			_line = new $ko.observable(),
 			_part = new $ko.observable(),
-			_cone = new $ko.observable(),
-			_sync = new $ko.observable();
+			_sync = new $ko.observable(),
+			_cone = new $ko.observable();
 
 		this.grid = new $ko.pureComputed(_grid);
 		this.line = new $ko.pureComputed(_line);
 		this.part = new $ko.pureComputed(_part);
-		this.cone = new $ko.pureComputed(_cone);
 		this.sync = new $ko.pureComputed(_sync);
+		this.cone = new $ko.pureComputed(_cone);
 
 		this.onSpeed = function () {
 			_grid(frame.grid);
@@ -33,8 +33,8 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 		this.onTime = function () {
 			_part(frame.part);
-			_cone(frame.cone);
 			_sync(frame.sync);
+			_cone(frame.cone);
 		}
 	}
 

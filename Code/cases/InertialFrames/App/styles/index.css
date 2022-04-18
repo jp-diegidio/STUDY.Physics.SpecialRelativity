@@ -146,27 +146,27 @@ p {
  * Special styles
  ********************************************************************/
 
-.realB {
+.B-act {
 	color: #5090ff;
 }
 
-.simB {
+.B-sim {
 	color: #30d0d0;
 }
 
-.appB {
+.B-vis {
 	color: #30b830;
 }
 
-.realA {
+.A-act {
 	color: #e03030;
 }
 
-.simA {
+.A-sim {
 	color: #e07f00;
 }
 
-.appA {
+.A-vis {
 	color: #e0c000;
 }
 

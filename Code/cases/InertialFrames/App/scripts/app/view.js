@@ -17,70 +17,31 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	var $cko = $global["nan"].common.ko;
 
 	function GraphView(frame) {
-		var _F = frame;
-
-		this.grid = {
-			T: new $ko.pureComputed(function () { return _F.grid().T; }),
-			X: new $ko.pureComputed(function () { return _F.grid().X; })
-		};
-
-		this.line = {
-			B: new $ko.pureComputed(function () { return _F.line().B; }),
-			A: new $ko.pureComputed(function () { return _F.line().A; })
-		};
-
-		this.part = {
-			BR: new $ko.pureComputed(function () { return _F.part().BR; }),
-			AR: new $ko.pureComputed(function () { return _F.part().AR; }),
-			AS: new $ko.pureComputed(function () { return _F.part().AS; }),
-			BS: new $ko.pureComputed(function () { return _F.part().BS; }),
-			AA: new $ko.pureComputed(function () { return _F.part().AA; }),
-			BA: new $ko.pureComputed(function () { return _F.part().BA; })
-		};
-
-		this.cone = {
-			Bp: new $ko.pureComputed(function () { return _F.cone().Bp; }),
-			Bn: new $ko.pureComputed(function () { return _F.cone().Bn; }),
-			Ap: new $ko.pureComputed(function () { return _F.cone().Ap; }),
-			An: new $ko.pureComputed(function () { return _F.cone().An; })
-		};
-
-		this.sync = {
-			BRv: new $ko.pureComputed(function () { return _F.sync().BRv; }),
-			BRh: new $ko.pureComputed(function () { return _F.sync().BRh; }),
-			ARv: new $ko.pureComputed(function () { return _F.sync().ARv; }),
-			ARh: new $ko.pureComputed(function () { return _F.sync().ARh; })
-		};
+		this.grid = new $ko.pureComputed(() => frame.grid());
+		this.line = new $ko.pureComputed(() => frame.line());
+		this.part = new $ko.pureComputed(() => frame.part());
+		this.sync = new $ko.pureComputed(() => frame.sync());
+		this.cone = new $ko.pureComputed(() => frame.cone());
 	}
 
 	function DataView(frame, visible_dg) {
-		var _F = frame,
-			_V_dg = visible_dg;
-
 		function _DATA(p) {
-			return _V_dg() ?
-				{
-					T: p.t_dg,
-					X: p.x_dg,
-					VT: p.vt_dg,
-					VX: p.vx_dg
-				} :
-				{
-					T: p.t,
-					X: p.x,
-					VT: p.vt,
-					VX: p.vx
-				};
+			return visible_dg() ?
+				{ T: p.t_dg, X: p.x_dg, VT: p.vt_dg, VX: p.vx_dg } :
+				{ T: p.t, X: p.x, VT: p.vt, VX: p.vx };
 		}
 
-		this.dg = _V_dg;
+		this.B = {
+			act: new $ko.pureComputed(() => _DATA(frame.part().B.act)),
+			sim: new $ko.pureComputed(() => _DATA(frame.part().B.sim)),
+			vis: new $ko.pureComputed(() => _DATA(frame.part().B.vis))
+		};
 
-		this.BR = new $ko.pureComputed(function () { return _DATA(_F.part().BR); });
-		this.AR = new $ko.pureComputed(function () { return _DATA(_F.part().AR); });
-		this.AS = new $ko.pureComputed(function () { return _DATA(_F.part().AS); });
-		this.BS = new $ko.pureComputed(function () { return _DATA(_F.part().BS); });
-		this.AA = new $ko.pureComputed(function () { return _DATA(_F.part().AA); });
-		this.BA = new $ko.pureComputed(function () { return _DATA(_F.part().BA); });
+		this.A = {
+			act: new $ko.pureComputed(() => _DATA(frame.part().A.act)),
+			sim: new $ko.pureComputed(() => _DATA(frame.part().A.sim)),
+			vis: new $ko.pureComputed(() => _DATA(frame.part().A.vis))
+		};
 	}
 
 	function CtrlView(model, control, resetHard) {
