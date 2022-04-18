@@ -1,12 +1,18 @@
 {
-	// https://go.microsoft.com/fwlink/?linkid=830387
+	// <https://go.microsoft.com/fwlink/?linkid=830387>
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "InertialFrames (Chrome)",
+			"name": "Cases (Chrome)",
 			"type": "chrome",
 			"request": "launch",
-			"file": "${workspaceFolder}\\InertialFrames\\App\\index.html"
+			"file": "${workspaceFolder}\\Code\\cases\\index.html"
+		},
+		{
+			"name": "Cases/InertialFrames (Chrome)",
+			"type": "chrome",
+			"request": "launch",
+			"file": "${workspaceFolder}\\Code\\cases\\InertialFrames\\App\\index.html"
 		}
 	]
 }

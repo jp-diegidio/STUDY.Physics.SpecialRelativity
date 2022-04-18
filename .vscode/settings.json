@@ -7,7 +7,7 @@
 	"html.format.wrapAttributes": "preserve-aligned",
 	"html.format.endWithNewline": true,
 	"html.format.extraLiners": "",
-	"js/ts.implicitProjectConfig.target": "ES5",
+	"js/ts.implicitProjectConfig.target": "ES2015",
 	"js/ts.implicitProjectConfig.module": "None",
 	"js/ts.implicitProjectConfig.checkJs": true,
 	"js/ts.implicitProjectConfig.strictNullChecks": true,
