@@ -3,10 +3,10 @@ CommonResources/Nan.Common.Ko version 1.1.0
 STUDY.Physics.SpecialRelativity/CommonResources
 Physics case studies: Special Relativity: Common Resources
 
-Copyright 2020-2022 Julio P. Di Egidio (http://julio.diegidio.name)
+Copyright (C) 2020-2022 Julio P. Di Egidio (http://julio.diegidio.name)
 CommonResources is part of STUDY.Physics.SpecialRelativity
 (see https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity).
-This software is released under the terms of the GNU-GPLv3 license.
+CommonResources is released under the terms of the GNU-GPLv3 license.
 As usual, NO WARRANTY OF ANY KIND is implied.
 */
 

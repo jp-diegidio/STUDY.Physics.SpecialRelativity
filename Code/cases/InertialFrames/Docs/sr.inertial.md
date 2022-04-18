@@ -1,11 +1,11 @@
 # Special Relativity: Inertial Frames
 
-**InertialFrames version 1.0.0-alpha**  
+**InertialFrames version 1.1.0**  
 **STUDY.Physics.SpecialRelativity/InertialFrames**  
 **Physics case studies: Special Relativity: Inertial Frames**
 
-Copyright (C) 2020 Julio P. Di Egidio (http://julio.diegidio.name)  
-InertialFrames is part of the STUDY.Physics.SpecialRelativity collection  
+Copyright (C) 2020-2022 Julio P. Di Egidio (http://julio.diegidio.name)  
+InertialFrames is part of STUDY.Physics.SpecialRelativity  
 (see https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity).  
 InertialFrames is released under the terms of the GNU-GPLv3 license.  
 As usual, NO WARRANTY OF ANY KIND is implied.
