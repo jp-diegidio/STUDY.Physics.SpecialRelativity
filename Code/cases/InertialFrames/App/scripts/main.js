@@ -29,14 +29,19 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		},
 		control: {},
 		view: {
-			precision: 3,
 			resetHard: true,
+			precision: 3,
+			hyper: {
+				steps: 100,
+				clipped: false
+			},
 			visible: {
-				grid: true,
 				line: true,
 				part: true,
+				hyper: true,
+				simul: true,
 				cone: true,
-				sync: true,
+				grid: true,
 				data: true,
 				"d/g": false
 			}

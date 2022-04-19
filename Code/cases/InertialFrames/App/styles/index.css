@@ -287,7 +287,7 @@ table.ctrl th.name.ctrl {
 }
 
 td.input {
-	width: 20em;
+	width: 22em;
 }
 
 td.input input.value {
@@ -295,7 +295,7 @@ td.input input.value {
 }
 
 td.input input.slider {
-	width: 20em;
+	width: 22em;
 }
 
 td.input label.check {

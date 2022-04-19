@@ -28,6 +28,8 @@
 		"mathjax",
 		"mathrm",
 		"oper",
+		"simul",
+		"simuls",
 		"subseteq"
 	],
 	"cSpell.words": [

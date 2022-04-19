@@ -13,18 +13,20 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 (function ($global, $ko) {
 	"use strict";
 
-	function FrameModel(frame) {
+	function FrameModel(frame, hyper) {
 		var _grid = new $ko.observable(),
 			_line = new $ko.observable(),
 			_part = new $ko.observable(),
-			_sync = new $ko.observable(),
-			_cone = new $ko.observable();
+			_simul = new $ko.observable(),
+			_cone = new $ko.observable(),
+			_hyper = new $ko.observable();
 
 		this.grid = new $ko.pureComputed(_grid);
 		this.line = new $ko.pureComputed(_line);
 		this.part = new $ko.pureComputed(_part);
-		this.sync = new $ko.pureComputed(_sync);
+		this.simul = new $ko.pureComputed(_simul);
 		this.cone = new $ko.pureComputed(_cone);
+		this.hyper = new $ko.pureComputed(_hyper);
 
 		this.onSpeed = function () {
 			_grid(frame.grid);
@@ -33,8 +35,10 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 		this.onTime = function () {
 			_part(frame.part);
-			_sync(frame.sync);
+			_simul(frame.simul);
 			_cone(frame.cone);
+
+			_hyper(hyper);
 		}
 	}
 
@@ -51,8 +55,8 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 		var _logic = new Logic(onSpeed, onTime);
 
-		var _frameB = new FrameModel(_logic.frameB),
-			_frameA = new FrameModel(_logic.frameA);
+		var _frameB = new FrameModel(_logic.frameB, _logic.hyper),
+			_frameA = new FrameModel(_logic.frameA, _logic.hyper);
 
 		function onSpeed() {
 			_speed(_logic.speed());
@@ -84,21 +88,10 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			return _logic.gamma(b);
 		});
 
-		this.setTimeMul = function (tm) {
-			_timeMul(tm);
-		};
-
-		this.setTimeFreq = function (tf) {
-			_timeFreq(tf);
-		};
-
-		this.setSpeed = function (b) {
-			_logic.setSpeed(b);
-		};
-
-		this.setTime = function (t) {
-			_logic.setTime(t);
-		};
+		this.setTimeMul = function (tm) { _timeMul(tm); };
+		this.setTimeFreq = function (tf) { _timeFreq(tf); };
+		this.setSpeed = function (b) { _logic.setSpeed(b); };
+		this.setTime = function (t) { _logic.setTime(t); };
 
 		this.reset = function (hard) {
 			if (hard) {

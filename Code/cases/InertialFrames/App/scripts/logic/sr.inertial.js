@@ -42,7 +42,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			this.Svx = () => new $Math.Scalar(f * b, _g, p);
 		}
 
-		function Sync() {
+		function Simul() {
 			// t(v, x, ct, cx) = ct + v(x - cx)
 			// x(v, t, ct, cx) = cx + v(t - ct)
 			this.h_t = (v, x, ct, cx) => ct + v * (x - cx);
@@ -81,7 +81,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			}
 		};
 
-		this.sync = new Sync();
+		this.simul = new Simul();
 		this.cone = new Cone();
 	}
 
@@ -193,25 +193,25 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			},
 		};
 
-		this.sync = {
+		this.simul = {
 			B: {
 				v: {
-					x0_dg: _logic.sync.v_x(0, 0, _Ba.t_dg, _Ba.x_dg),
-					x1_dg: _logic.sync.v_x(0, 1, _Ba.t_dg, _Ba.x_dg)
+					x0_dg: _logic.simul.v_x(0, 0, _Ba.t_dg, _Ba.x_dg),
+					x1_dg: _logic.simul.v_x(0, 1, _Ba.t_dg, _Ba.x_dg)
 				},
 				h: {
-					t0_dg: _logic.sync.h_t(0, 0, _Ba.t_dg, _Ba.x_dg),
-					t1_dg: _logic.sync.h_t(0, 1, _Ba.t_dg, _Ba.x_dg)
+					t0_dg: _logic.simul.h_t(0, 0, _Ba.t_dg, _Ba.x_dg),
+					t1_dg: _logic.simul.h_t(0, 1, _Ba.t_dg, _Ba.x_dg)
 				},
 			},
 			A: {
 				v: {
-					x0_dg: _logic.sync.v_x(_b, 0, _Aa.t_dg, _Aa.x_dg),
-					x1_dg: _logic.sync.v_x(_b, 1, _Aa.t_dg, _Aa.x_dg)
+					x0_dg: _logic.simul.v_x(_b, 0, _Aa.t_dg, _Aa.x_dg),
+					x1_dg: _logic.simul.v_x(_b, 1, _Aa.t_dg, _Aa.x_dg)
 				},
 				h: {
-					t0_dg: _logic.sync.h_t(_b, 0, _Aa.t_dg, _Aa.x_dg),
-					t1_dg: _logic.sync.h_t(_b, 1, _Aa.t_dg, _Aa.x_dg)
+					t0_dg: _logic.simul.h_t(_b, 0, _Aa.t_dg, _Aa.x_dg),
+					t1_dg: _logic.simul.h_t(_b, 1, _Aa.t_dg, _Aa.x_dg)
 				},
 			}
 		};
@@ -246,10 +246,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	 * @constructor
 	 */
 	function Diagram() {
-		/** @type {Logic} */
-		var _logic;
-
-		var _b, _t;
+		var _logic, _b, _t;
 
 		this.setSpeed = function (b) {
 			_b = $Math.cmod(b, 1);
@@ -275,11 +272,13 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			this.frameB.part._onTime(frameB);
 			this.frameA.part._onTime(frameB);
 
-			this.frameB.sync._onTime(frameB);
-			this.frameA.sync._onTime(frameB);
+			this.frameB.simul._onTime(frameB);
+			this.frameA.simul._onTime(frameB);
 
 			this.frameB.cone._onTime(frameB);
 			this.frameA.cone._onTime(frameB);
+
+			this.hyper._onTime(frameB);
 
 			return _t;
 		};
@@ -312,13 +311,13 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					this.A = frameB.part.A;
 				}
 			},
-			sync: {
+			simul: {
 				B: {}, A: {},
 
 				_onTime: function (/** @type {FrameB_forTime} */ frameB) {
-					this.B = frameB.sync.B;
+					this.B = frameB.simul.B;
 
-					this.A = frameB.sync.A;
+					this.A = frameB.simul.A;
 				}
 			},
 			cone: {
@@ -385,19 +384,19 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					this.A.vis = _Part(frameB.part.B.vis);
 				}
 			},
-			sync: {
+			simul: {
 				A: { h: {}, v: {} }, B: { h: {}, v: {} },
 
 				_onTime: function (/** @type {FrameB_forTime} */ frameB) {
-					this.A.h.t0_dg = frameB.sync.B.h.t0_dg;
-					this.A.h.t1_dg = frameB.sync.B.h.t1_dg;
-					this.A.v.x0_dg = -frameB.sync.B.v.x0_dg;
-					this.A.v.x1_dg = -frameB.sync.B.v.x1_dg;
+					this.A.h.t0_dg = frameB.simul.B.h.t0_dg;
+					this.A.h.t1_dg = frameB.simul.B.h.t1_dg;
+					this.A.v.x0_dg = -frameB.simul.B.v.x0_dg;
+					this.A.v.x1_dg = -frameB.simul.B.v.x1_dg;
 
-					this.B.h.t0_dg = frameB.sync.A.h.t0_dg;
-					this.B.h.t1_dg = frameB.sync.A.h.t1_dg;
-					this.B.v.x0_dg = -frameB.sync.A.v.x0_dg;
-					this.B.v.x1_dg = -frameB.sync.A.v.x1_dg;
+					this.B.h.t0_dg = frameB.simul.A.h.t0_dg;
+					this.B.h.t1_dg = frameB.simul.A.h.t1_dg;
+					this.B.v.x0_dg = -frameB.simul.A.v.x0_dg;
+					this.B.v.x1_dg = -frameB.simul.A.v.x1_dg;
 				}
 			},
 			cone: {
@@ -408,6 +407,27 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 					this.B = frameB.cone.A;
 				}
+			}
+		};
+
+		this.hyper = {
+			act: {}, sim: {}, vis: {},
+
+			_onTime: function (/** @type {FrameB_forTime} */ frameB) {
+				function Hyper_T_dg(p0, p1) {
+					return function (x_dg, clipped) {
+						if (!clipped || x_dg <= p1.x_dg) {
+							return Math.sqrt(p0.t_dg * p0.t_dg + x_dg * x_dg);
+						}
+					};
+				}
+
+				var _B = frameB.part.B,
+					_A = frameB.part.A;
+
+				this.act = { T_dg: Hyper_T_dg(_B.act, _A.act) };
+				this.sim = { T_dg: Hyper_T_dg(_B.sim, _A.sim) };
+				this.vis = { T_dg: Hyper_T_dg(_B.vis, _A.vis) };
 			}
 		};
 	}
@@ -437,6 +457,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 		this.frameB = _diag.frameB;
 		this.frameA = _diag.frameA;
+		this.hyper = _diag.hyper;
 
 		this.setSpeed = function (b) {
 			setSpeed(b, _t);
