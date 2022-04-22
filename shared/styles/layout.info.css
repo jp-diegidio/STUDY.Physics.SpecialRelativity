@@ -12,7 +12,7 @@ table.info th,
 table.info td {
 	font-size: 90%;
 	height: 2em;
-	padding: 0 0.5em;
+	padding: 0 0.35em;
 	/* border: solid 1px red; */
 }
 
@@ -23,11 +23,12 @@ table.info td.oper {}
 table.info td.expr {}
 
 table.info td.value {
-	padding-right: 0;
+	width: 3.2em;
+	padding: 0 0;
 	text-align: right;
 }
 
 table.info td.unit {
-	padding-left: 0.3em;
+	padding: 0 0.25em;
 	text-align: left;
 }
