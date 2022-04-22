@@ -16,7 +16,9 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 ## The game
 
 Bob and Alice pass by each other collinearly at a relative constant speed.  
-They reset their respective clocks to zero at the moment they are colocated.
+They reset their clocks to zero at the moment they are colocated.
+
+## The outcome
 
 ![sr.inertial: Space-time diagrams](sr.inertial.png)  
 (For an interactive version of these diagrams see the
