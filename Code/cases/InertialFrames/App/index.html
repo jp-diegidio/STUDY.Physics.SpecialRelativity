@@ -14,35 +14,38 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 <head>
 	<meta charset="utf-8">
 	<title>Special Relativity: Inertial Frames</title>
-	<link href="styles/index.css" rel="stylesheet">
+	<link href="styles/main.css" rel="stylesheet">
 </head>
 <body>
-	<h1>Special Relativity: Inertial Frames</h1>
+	<h1 class="head">
+		Special Relativity: Inertial Frames
+	</h1>
 
 	<p class="intro">
 		Bob and Alice pass by each other collinearly at a relative constant speed.<br>
-		They reset their respective clocks to zero at the moment they are colocated.<br>
+		They reset their clocks to zero at the moment they are colocated.<br>
 	</p>
 
-	<p>
-		<a href="../Docs/sr.inertial">Go to documentation page</a><br>
-		<a href="https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity">Go to project home page</a>
+	<p class="block">
+		<a href="../Docs/sr.inertial.md">Go to the mathematical analysis</a><br>
+		<a href="https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity">Go to the project home page</a>
 	</p>
 
 	<div class="layout">
 		<div class="graph">
 			<svg style="display: none" data-bind="visible: true"
+				 width="720" height="360"
 				 viewBox="-1.85 0 3.7 1.55" preserveAspectRatio="xMidYMid meet"
 				 stroke="grey" stroke-linecap="round" fill="none" font-size="0.5%">
 				<!-- Title:B -->
 				<g transform="translate(-1.35 0.15)" font-size="160%">
-					<g class="title" stroke-width="0" text-anchor="middle">
+					<g class="part" stroke-width="0" text-anchor="middle">
 						<text fill="blue" x="0.5" y="0">Bob</text>
 					</g>
 				</g>
 				<!-- Title:A -->
 				<g transform="translate(1.35 0.15)" font-size="160%">
-					<g class="title" stroke-width="0" text-anchor="middle">
+					<g class="part" stroke-width="0" text-anchor="middle">
 						<text fill="red" x="-0.5" y="0">Alice</text>
 					</g>
 				</g>
@@ -343,7 +346,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	<div class="layout">
 		<table class="ctrl" data-bind="with: ctrl">
 			<caption>Controls</caption>
-			<tr>
+			<tr class="input">
 				<th class="name">Speed</th>
 				<td class="input">
 					<input class="slider" type="range"
@@ -356,13 +359,13 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					</datalist>
 				</td>
 			</tr>
-			<tr>
+			<tr class="input">
 				<th class="name">Time</th>
 				<td class="input">
 					<input class="slider" type="range" disabled
 						   min="0" max="1" step="0.005" list="timeRange"
 						   data-bind="enable: true, textInput: time.value,
-										event: { mousedown: onStartEdit }">
+									  event: { mousedown: onStartEdit }">
 					<datalist id="timeRange">
 						<option value="0.25"></option>
 						<option value="0.5"></option>
@@ -370,7 +373,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					</datalist>
 				</td>
 			</tr>
-			<tr>
+			<tr class="input">
 				<th class="name ctrl">Show</th>
 				<td class="input">
 					<label class="check" title="Particles">
@@ -415,14 +418,15 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 					</label>
 				</td>
 			</tr>
-			<tr>
+			<tr class="ctrls">
 				<td colspan="2" class="ctrls">
 					<button class="play" disabled
-							data-bind="enable: canStart, visible: canStart, click: start">PLAY</button>
+							data-bind="visible: canStart, enable: canStart, click: start">PLAY</button>
 					<button class="play" disabled style="display: none"
-							data-bind="enable: canStop, visible: canStop, click: stop">PAUSE</button>
-					<button class="reset" disabled
-							data-bind="enable: canReset, click: reset">R</button>
+							data-bind="visible: canStop, enable: canStop, click: stop">PAUSE</button>
+					<button class="reset" disabled data-bind="enable: canReset, click: reset">
+						R<span data-bind="visible: $root.resetHard">!</span>
+					</button>
 					<select class="timeMul" disabled data-bind="
 						enable: true,
 						options: [0.1, 0.2, 0.5, 1, 2],
@@ -460,7 +464,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			<tr>
 				<th class="name">&beta;</th>
 				<td class="oper">=</td>
-				<td class="expr"><span class="ctrl">|v|</span> /<span class="const">c</span></td>
+				<td class="expr">|v| /c</td>
 				<td class="oper">=</td>
 				<td class="value"><span data-bind="text: beta().toFixed($root.precision)"></span></td>
 				<td class="unit"></td>
@@ -468,7 +472,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			<tr>
 				<th class="name">&gamma;</th>
 				<td class="oper">=</td>
-				<td class="expr">&Sqrt;(1-<span class="ctrl">&beta;</span><sup>2</sup>)<sup>-1</sup></td>
+				<td class="expr">&Sqrt;(1-&beta;<sup>2</sup>)<sup>-1</sup></td>
 				<td class="oper">=</td>
 				<td class="value"><span data-bind="text: gamma().toFixed($root.precision)"></span></td>
 				<td class="unit"></td>
@@ -481,7 +485,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		<table class="data" data-bind="with: dataB">
 			<caption>Data B</caption>
 			<tr>
-				<th class="title B-act">Bob</th>
+				<th class="part B-act">Bob</th>
 				<th class="head">t /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
 				<th class="head">x /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>cT</th>
 				<th class="head">v<sub>t</sub> /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
@@ -540,7 +544,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		<table class="data" data-bind="with: dataA">
 			<caption>Data A</caption>
 			<tr>
-				<th class="title A-act">Alice</th>
+				<th class="part A-act">Alice</th>
 				<th class="head">t' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
 				<th class="head">x' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>cT</th>
 				<th class="head">v<sub>t</sub>' /<span data-bind="visible: $root.visible['d/g']">&gamma;</span>T</th>
@@ -598,8 +602,8 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	</div>
 	<!-- /ko -->
 
-	<p class="footer">
-		<b>InertialFrames</b> version 1.1.0<br>
+	<p class="foot">
+		InertialFrames version 1.1.0<br>
 		&copy; 2020-2022 Julio P. Di Egidio<br>
 		Released under GNU-GPLv3<br>
 		<a href="https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity">Project home page</a><br>

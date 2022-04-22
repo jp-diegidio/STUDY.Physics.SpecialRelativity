@@ -1,0 +1,33 @@
+/*
+STUDY.Physics.SR.Inertial version 1.1.0
+Case Study: Physics: Special Relativity: Inertial Frames
+https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity/InertialFrames
+
+Copyright (C) 2020-2022 Julio P. Di Egidio (http://julio.diegidio.name)
+This program is released under the terms of the GNU-GPLv3 license.
+As usual, NO WARRANTY OF ANY KIND is implied.
+*/
+
+.B-act {
+	color: #5090ff;
+}
+
+.B-sim {
+	color: #30d0f0;
+}
+
+.B-vis {
+	color: #20b820;
+}
+
+.A-act {
+	color: #e03030;
+}
+
+.A-sim {
+	color: #e07f00;
+}
+
+.A-vis {
+	color: #e0c000;
+}

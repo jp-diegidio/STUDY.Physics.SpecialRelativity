@@ -1,0 +1,101 @@
+/*
+STUDY.Physics.SR.Inertial version 1.1.0
+Case Study: Physics: Special Relativity: Inertial Frames
+https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity/InertialFrames
+
+Copyright (C) 2020-2022 Julio P. Di Egidio (http://julio.diegidio.name)
+This program is released under the terms of the GNU-GPLv3 license.
+As usual, NO WARRANTY OF ANY KIND is implied.
+*/
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-size: 100%;
+	line-height: 1.5;
+	text-align: center;
+	min-width: 48em;
+	overflow: auto;
+	white-space: nowrap;
+	/* border: solid 1px red; */
+}
+
+sup {
+	font-size: 75%;
+}
+
+input,
+select,
+button {
+	font-size: 100%;
+}
+
+table {
+	display: inline-table;
+	vertical-align: top;
+	border-collapse: collapse;
+}
+
+caption {
+	caption-side: top;
+	text-align: center;
+	vertical-align: middle;
+}
+
+th,
+td {
+	padding: 0.2em 0.5em;
+	text-align: center;
+	vertical-align: middle;
+}
+
+h1 {
+	font-size: 200%;
+	margin: 0.5em 1em;
+}
+
+div {
+	margin: 0.5em 1em;
+}
+
+p {
+	margin: 0.5em 1em;
+}
+
+table {
+	margin: 0.5em 1em;
+}
+
+caption {
+	margin: 0;
+	margin-bottom: 0.5em;
+}
+
+h1.head {
+	margin-bottom: 0.2em;
+}
+
+p.intro {
+	font-size: 110%;
+}
+
+p.foot {
+	font-size: 90%;
+	margin: 1.5em;
+}
+
+div.graph {
+	display: inline-block;
+	font-size: 100%;
+	width: 45em;
+	height: 22.5em;
+}
+
+div.graph svg {
+	width: 100%;
+	height: 100%;
+}

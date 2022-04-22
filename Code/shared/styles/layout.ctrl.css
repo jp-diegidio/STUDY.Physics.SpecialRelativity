@@ -1,0 +1,73 @@
+/*
+STUDY.Physics.SR.Inertial version 1.1.0
+Case Study: Physics: Special Relativity: Inertial Frames
+https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity/InertialFrames
+
+Copyright (C) 2020-2022 Julio P. Di Egidio (http://julio.diegidio.name)
+This program is released under the terms of the GNU-GPLv3 license.
+As usual, NO WARRANTY OF ANY KIND is implied.
+*/
+
+table.ctrl th,
+table.ctrl td {
+	font-size: 90%;
+	height: 2em;
+	padding: 0;
+	/* border: solid 1px red; */
+}
+
+table.ctrl tr.ctrls th,
+table.ctrl tr.ctrls td {
+	height: 3.8em;
+}
+
+table.ctrl th.name {
+	width: 3.6em;
+}
+
+table.ctrl th.name.ctrl {
+	font-style: italic;
+}
+
+table.ctrl td.input {
+	width: 22em;
+}
+
+table.ctrl td.input input.slider {
+	width: 21em;
+}
+
+table.ctrl td.input label.check {
+	font-size: 90%;
+	margin: 0 0.3em;
+}
+
+table.ctrl td.input input.check {
+	margin: 0;
+}
+
+table.ctrl td.ctrls button {
+	font-size: 120%;
+	width: 5em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-right: 0.5em;
+	line-height: 1.2;
+}
+
+table.ctrl td.ctrls button.reset {
+	width: 2em;
+}
+
+table.ctrl td.ctrls select {
+	height: 1.65em;
+	margin-left: 1em;
+}
+
+table.ctrl td.ctrls select.timeMul {
+	width: 4.7em;
+}
+
+table.ctrl td.ctrls select.timeFreq {
+	width: 6.2em;
+}

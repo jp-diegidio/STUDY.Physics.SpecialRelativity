@@ -150,6 +150,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 
 		var _visible = new ViewVisible(options.visible);
 
+		this.resetHard = RESET_HARD;
 		this.precision = PRECISION;
 		this.visible = _visible;
 
