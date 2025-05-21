@@ -1,13 +1,10 @@
 /*
-CommonResources/Nan.Common.Timers version 1.1.0
-STUDY.Physics.SpecialRelativity/CommonResources
-Physics case studies: Special Relativity: Common Resources
-
-Copyright (C) 2020-2022 Julio P. Di Egidio (http://julio.diegidio.name)
-CommonResources is part of STUDY.Physics.SpecialRelativity
-(see https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity).
-CommonResources is released under the terms of the GNU-GPLv3 license.
-As usual, NO WARRANTY OF ANY KIND is implied.
+	STUDY.Physics.SpecialRelativity/Common
+	Physics case studies: Special Relativity: Common Resources
+	https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity
+	Copyright (C) 2020-2025 Julio P. Di Egidio (http://julio.diegidio.name)
+	This software is released under the terms of the GNU-GPLv3 license.
+	As usual, NO WARRANTY OF ANY KIND is implied.
 */
 
 (function ($global) {
