@@ -16,7 +16,7 @@ Contains:
 ## The game
 
 Bob and Alice pass by each other collinearly at a relative constant speed.  
-They reset their respective clocks to zero at the moment they are colocated.
+They reset their clocks to zero at the moment they are colocated.
 
 ## The outcome
 
