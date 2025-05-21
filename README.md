@@ -1,8 +1,7 @@
 # STUDY.Physics.SpecialRelativity
 ## **Physics case studies: Special Relativity**
 
-This is an **open project**: collaborations, suggestions, corrections,
-as well as issues and pull requests are all very welcome.
+This is an **open project**: collaboration is welcome.
 
 ## Overview
 
@@ -11,11 +10,11 @@ This repository collects the following case studies:
 - **Inertial Frames** version 1.1.0  
   Bob and Alice pass by each other collinearly at a relative constant speed.  
   They reset their clocks to zero at the moment they are colocated.  
-  - [Interactive diagrams](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/home/InertialFrames/App/index.html)
-  - [Mathematical analysis](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/home/InertialFrames/Docs/sr.inertial.md)
-  - [Source code](https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity/blob/master/home/InertialFrames)
+  - [Formal analysis](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/content/InertialFrames/doc.html)
+  - [Interactive diagram](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/content/InertialFrames/app.html)
+  - [Source code](https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity/blob/master/content/InertialFrames)
 
-More case studies are planned, next in line being the Twin Paradox.
+More studies are planned, up to the Twin Paradox.
 
 ## Licensing
 
