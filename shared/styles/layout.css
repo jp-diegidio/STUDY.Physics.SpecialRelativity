@@ -8,20 +8,31 @@ This program is released under the terms of the GNU-GPLv3 license.
 As usual, NO WARRANTY OF ANY KIND is implied.
 */
 
-html,
 body {
-	margin: 0;
+	margin: 0 auto;
 	padding: 0;
-}
-
-body {
 	font-size: 100%;
+	width: 48em;
 	line-height: 1.5;
 	text-align: center;
-	min-width: 48em;
-	overflow: auto;
-	white-space: nowrap;
 	/* border: solid 1px red; */
+}
+
+.MJX-TEX {
+	padding: 0.25em 0.1em 0;
+	/* background-color: #303030; */
+}
+
+.content {
+	text-align: left;
+}
+
+.content.ccapt {
+	margin-bottom: 0;
+}
+
+.content.clist {
+	margin-top: 0;
 }
 
 sup {
@@ -53,9 +64,24 @@ td {
 	vertical-align: middle;
 }
 
-h1 {
+h1.title {
 	font-size: 200%;
-	margin: 0.5em 1em;
+	margin: 0.5em 1em 0.2em;
+}
+
+h1 {
+	font-size: 190%;
+	margin: 1em 1em 0.5em;
+}
+
+h2 {
+	font-size: 160%;
+	margin: 1em 1em 0.5em;
+}
+
+h3 {
+	font-size: 125%;
+	margin: 1em 1em 0.7em;
 }
 
 div {
@@ -75,10 +101,6 @@ caption {
 	margin-bottom: 0.5em;
 }
 
-h1.head {
-	margin-bottom: 0.2em;
-}
-
 p.intro {
 	font-size: 110%;
 }
@@ -88,14 +110,27 @@ p.foot {
 	margin: 1.5em;
 }
 
-div.graph {
-	display: inline-block;
-	font-size: 100%;
-	width: 45em;
-	height: 22.5em;
+p.content {
+	line-height: 1.8;
+	margin: 0.8em 1em;
 }
 
-div.graph svg {
-	width: 100%;
-	height: 100%;
+ul.content {
+	line-height: 1.8;
+	margin: 0.8em 0;
+}
+
+div.graph {
+	width: 720px;
+	font-size: 100%;
+	margin: 1em 1em 0.5em;
+	padding: 0;
+}
+
+div.graph>svg {
+	display: block;
+}
+
+div.graph>img {
+	display: block;
 }

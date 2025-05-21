@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<!--
+	SR.Inertial version 1.1.0
+	STUDY.Physics.SpecialRelativity/InertialFrames
+	Physics case studies: Special Relativity: Inertial Frames
+
+	Copyright (C) 2020-2022 Julio P. Di Egidio (http://julio.diegidio.name)
+	InertialFrames is part of STUDY.Physics.SpecialRelativity
+	(see https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity).
+	InertialFrames is released under the terms of the GNU-GPLv3 license.
+	As usual, NO WARRANTY OF ANY KIND is implied.
+-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Special Relativity / Inertial Frames / Doc</title>
+	<link href="styles/doc.css" rel="stylesheet">
+</head>
+<body class="doc">
+	<h1 class="title">
+		Special Relativity: Inertial Frames
+	</h1>
+
+	<p class="intro">
+		Bob and Alice pass by each other collinearly at a relative constant speed.<br>
+		They reset their clocks to zero at the moment they are colocated.<br>
+	</p>
+
+	<p class="block">
+		<a href="index.html">Go to interactive diagram</a><br>
+		<a href="https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity">Go back to project page</a>
+	</p>
+
+	<div class="layout">
+		<div class="graph">
+			<img src="assets/diagram.png" width="720" height="360" alt="diagram">
+		</div>
+	</div>
+
+	<div style="display: none">
+		$$
+		% TODO: Spacing/kerning...?
+		\def \~{{\,\,\equiv\,}}
+		\def \is{{\,\,:=\,}}
+		\def \={{\,\,=\,}}
+		\def \+{{\,+}}
+		\def \-{{\,-}}
+		\def \/{{\,/}}
+		\def \pmf{{\,\pm}}
+
+		\def \P{{\bf{P}}}
+		\def \B{{\bf{B}}}
+		\def \A{{\bf{A}}}
+		\def \act{{\bf{act}}}
+		\def \sim{{\bf{sim}}}
+		\def \vis{{\bf{vis}}}
+
+		\def \ovl#1{{\overline{#1}}}
+		\def \vex#1{{\small{({#1})}}}
+		\def \ovP{\ovl{\P}}
+		\def \ovv{\ovl{\bf{v}}}
+		\def \ovB{\ovl{\B}}
+		\def \ovA{\ovl{\A}}
+
+		\def \T{{\operatorname{\small{T}}}}
+		\def \c{{\operatorname{\small{c\,}}}}
+		\def \v{{v\,}}
+		\def \t{{\tau}}
+		\def \b{{\beta\,}}
+		\def \g{{\gamma}}
+		\def \e{{\eta}}
+		\def \d{{\operatorname{\small{d\,}}}}
+
+		\def \sb{{\small{\beta}}}
+		\def \sc{{\small{1}}}
+		\def \gb{{\g_\sb}}
+		\def \gc{{\g_\sc}}
+		\def \gbt{{\gb\,\t}}
+		\def \ep{{\e^{+}\!}}
+		\def \en{{\e^{-}\!}}
+		\def \ex{{\e^{\pm}\!}}
+		\def \epb{{\ep_{\!\!\!\sb}}}
+		\def \enb{{\en_{\!\!\!\sb}}}
+		\def \exb{{\ex_{\!\!\!\sb}}}
+
+		\def \vec#1#2{{\left({#1}\,,{#2}\,\right)\,}}
+		\def \ivo#1#2{{\left]\,{#1}\,,{#2}\,\right[\,}}
+		\def \ivc#1#2{{\left[\,{#1}\,,{#2}\,\right]\,}}
+		\def \ino#1#2{{\;\in\ivo{#1}{#2}}}
+		\def \inc#1#2{{\;\in\ivc{#1}{#2}}}
+
+		\def \sqr#1{{\sqrt{\mathstrut{#1}}}}
+		\def \der#1{{\d{#1}\,/\d\t}}
+		\def \uhat#1{{{#1}_{\,\hat{}\,}}}
+
+		\def \pri#1{{{#1}\prime}}
+		\def \psu#1#2{{\pri{{#1}}_{\!{#2}}}}
+		\def \psB#1#2{{\psu{{#1}\,}{\!{#2}}}}
+		\def \pvl#1#2{{\psu{\ovl{#1}}{{#2}}}}
+
+		\def \BBa{{\B_\act}}
+		\def \BBs{{\B_\sim}}
+		\def \BBv{{\B_\vis}}
+		\def \BAa{{\A_\act}}
+		\def \BAs{{\A_\sim}}
+		\def \BAv{{\A_\vis}}
+		\def \AAa{{\psu{\A}{\act}}}
+		\def \AAs{{\psu{\A}{\sim}}}
+		\def \AAv{{\psu{\A}{\vis}}}
+		\def \ABa{{\psB{\B}{\act}}}
+		\def \ABs{{\psB{\B}{\sim}}}
+		\def \ABv{{\psB{\B}{\vis}}}
+
+		\def \pBBa{{\ovl{\B}_\act}}
+		\def \pBBs{{\ovl{\B}_\sim}}
+		\def \pBBv{{\ovl{\B}_\vis}}
+		\def \pBAa{{\ovl{\A}_\act}}
+		\def \pBAs{{\ovl{\A}_\sim}}
+		\def \pBAv{{\ovl{\A}_\vis}}
+		\def \pAAa{{\pri{\ovl{\A}}_\act}}
+		\def \pAAs{{\pri{\ovl{\A}}_\sim}}
+		\def \pAAv{{\pri{\ovl{\A}}_\vis}}
+		\def \pABa{{\pri{\ovl{\B}}_\act}}
+		\def \pABs{{\pri{\ovl{\B}}_\sim}}
+		\def \pABv{{\pri{\ovl{\B}}_\vis}}
+		$$
+	</div>
+
+	<div class="layout">
+		<p class="content ccapt">
+			In either frame of reference, we compute coordinates and velocities of:
+		</p>
+
+		<ul class="content clist">
+			<li>
+				the <b>actual</b> particles <span class="B-act">$\BBa$</span> and
+				<span class="A-act">$\BAa$</span> <small>($\act$ for actual)</small>,<br>
+				representing the actual positions of Bob and Alice respectively;
+			</li>
+			<li>
+				the <b>measured</b> particles <span class="B-sim">$\BBs$</span> and
+				<span class="A-sim">$\BAs$</span> <small>($\sim$ for simultaneous)</small>,<br>
+				representing what Bob and Alice can measure of each other;
+			</li>
+			<li>
+				the <b>apparent</b> particles <span class="B-vis">$\BBv$</span> and
+				<span class="A-vis">$\BAv$</span> <small>($\vis$ for visible)</small>,<br>
+				representing what Bob and Alice can observe of each other.
+			</li>
+		</ul>
+	</div>
+
+	<div class="layout">
+		<h1 class="content">
+			Physical import
+		</h1>
+
+		<p class="content">
+			The space-time diagrams make concrete the <i>clock hypothesis</i>,
+			i.e. proper time as <b>absolute time</b>, recovering absolute time
+			as the fundamental dynamic variable, and with it the relativistic
+			symmetry of the frame perspectives.
+		</p>
+
+		<p class="content">
+			The diagrams also show that, relative to any frame of reference,
+			any particle moves into the future and in space at a speed that
+			is <i>faster than measured</i> in that frame (i.e. in a plane
+			of simultaneity) by exactly its Lorentz factor. And this already
+			and essentially is <b>time travel</b>.
+		</p>
+
+		<p class="content">
+			In particular, the 4-velocity of light in any frame of reference
+			is (scalarly) <b>infinite</b> in all components, its magnitude
+			being exactly the <i>measured light speed</i> times its Lorentz
+			factor (see below for the formal details).
+		</p>
+	</div>
+
+	<div class="layout">
+		<h1 class="content">
+			Formal setup
+		</h1>
+
+		<p class="content">
+			In Special Relativity in $1\+1$ dimensions,<br>
+			with generic coordinates $\ovP \~ \vec{t^\vex{\P}}{x^\vex{\P}}\!$,<br>
+			and velocities $\ovv^\vex{\P} \~ \vec{v_t^\vex{\P}}{v_x^\vex{\P}}\!$.<br>
+		</p>
+
+		<p class="content">
+			Given $\c \ino{0}{\infty}$ the <i>measured speed of light</i>.<br>
+			Given $\T \ino{0}{\infty}$ the <i>proper time period</i>.<br>
+		</p>
+
+		<p class="content">
+			For $v \inc{0}{1}\c$ a (constant) <i>measured frame speed</i><br>
+			&nbsp; (i.e., WLOG, we are only considering the case
+			$v\ge\!0$ in the unprimed frame).<br>
+			For $\t \inc{0}{1}\T$ a <i>proper time</i> (by the clock).<br>
+		</p>
+
+		<p class="content">
+			Let $\b \= \b\!_v \is v\/\c \inc{0}{1}\!$.<br>
+			Let $\gb \is 1/{\small \sqr{1\-\b^2}} \inc{1}{\gc}\!$.<br>
+			Let $\epb \is 1/{\small (1\+\b)} \inc{1/2}{1}\!$.<br>
+			Let $\enb \is 1/{\small (1\-\b)} \inc{1}{2\,\gc^2}\!$.<br>
+			where $\epb\;\enb \= \gb^2$.<br>
+
+			&nbsp; (Note that, instead of saying $\gb \inc{1}{\infty}$, which is undefined,
+			we keep track of $\gb$ throughout as a scale factor, so we can keep our
+			intervals closed and have a uniform and finitely representable treatment
+			for all $v$. In fact, we make explicit the range of all coordinates to
+			facilitate delimiting the space-time diagrams.)
+		</p>
+
+		<p class="content ccapt">
+			Diagramatically, for any fixed velocity $\uhat{v}$
+			and point $\uhat{\ovP} \~ \vec{\uhat{t}}{\uhat{x}}$:
+		</p>
+
+		<ul class="content clist">
+			<li>
+				The <b>world line</b> through $\uhat{\ovP}$ is the straight line
+				$\uhat{v} (t \- \uhat{t}) \= x \- \uhat{x}$,<br>
+				which can be written as
+				$\uhat{\b\!} (t \- \uhat{t}) \= (x \- \uhat{x})/\c$.
+			</li>
+			<li>
+				Reciprocally, the <b>simultaneity plane</b> at $\uhat{\ovP}$ is
+				$t \- \uhat{t} \= \uhat{\b\!} (x \- \uhat{x})/\c$.
+			</li>
+			<li>
+				And, similarly, the <b>light cones</b> at $\uhat{\ovP}$ are
+				$t \- \uhat{t} \= \pmf (x \- \uhat{x})/\c$.
+			</li>
+		</ul>
+
+		<p class="content">
+			Finally, for reference, the form of our Lorentz transformations is:<br>
+			$\pri{t} \= \gb\, (t \- \v x/\c^2)$<br>
+			$\pri{x} \= \gb\, (x \- \v t)$<br>
+		</p>
+	</div>
+
+	<div class="layout">
+		<h1 class="content">
+			Formal derivation
+		</h1>
+
+		<p class="content">
+			We parametrize all formulas, besides implicitly on the (measured)
+			<b>relative speed</b>, on the one and only (universal) <b>proper time</b>.
+		</p>
+	</div>
+
+	<div class="layout">
+		<h2 class="content">
+			Frame <span class="B-act">$\B$</span>
+		</h2>
+
+		<p class="content">
+			This is the frame of reference in which <b>Bob</b> is at rest at the origin of space.
+		</p>
+
+		<p class="content">
+			We derive coordinates in this frame, whence velocities, by imposing the relevant
+			physical constraints, then by plain geometry.
+		</p>
+
+		<!-- Frame B: Particle B_act -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="B-act">$\B$</span> :&nbsp;
+			Particle <span class="B-act">$\BBa$</span>
+		</h3>
+
+		<p class="content">
+			This represents Bob's <b>actual</b> space-time position.
+		</p>
+
+		<p class="content">
+			We derive coordinates of $\BBa$ in this frame by imposing the constraints that
+			Bob is at rest at the origin of space, hence $x \= 0$, and that Bob's
+			proper distance from the origin of space-time is $|\t|$, hence by
+			the metric $|\t| \= {\small \sqr{{t}^2 \- x^2/\c^2}} \= {\small \sqr{{t}^2}} \= |t|$,
+			whence, with the direction of $t$ in accordance with that of $\t$, $t \= \t$.
+		</p>
+
+		<p class="content">
+			In summary, we get:<br>
+			$\pBBa(\t) \~ \vec{1}{0}\t$<br>
+			$\ovv^\vex{\BBa}(\t) \~ \vec{1}{0}$<br>
+		</p>
+
+		<p class="content">
+			with coordinates as derived above:<br>
+			$t^\vex{\BBa}(\t) \= \t \quad\, \inc{0}{1}\T$<br>
+			$x^\vex{\BBa}(\t) \= 0 \quad \inc{0}{0}\c\T$<br>
+		</p>
+
+		<p class="content">
+			hence, by taking derivatives w.r.t. $\t$, the velocity.
+		</p>
+
+		<p class="content ccapt">
+			Also, since Bob's measured speed is $0 \= x^\vex{\BBa} / t^\vex{\BBa}$:
+		</p>
+
+		<ul class="content clist">
+			<li>
+				Bob's <b>world line</b> is the vertical line through $\pBBa$,<br>
+				i.e. $0\, (t \- t^\vex{\BBa}) \= (x \- x^\vex{\BBa})/\c$, whence $x \= 0$.<br>
+			</li>
+			<li>
+				Bob's <b>simultaneity plane</b> is the horizontal line through $\pBBa$,<br>
+				i.e. $t \- t^\vex{\BBa} \= 0\, (x \- x^\vex{\BBa})/\c$, whence $t \= \t$.<br>
+			</li>
+			<li>
+				Bob's <b>light cones</b> are the lines with slope $\pmf\! 1$ through $\pBBa$,<br>
+				i.e. $t \- t^\vex{\BBa} = \pmf (x \- x^\vex{\BBa})/\c$, whence $t \= \t \pmf x/\c$.<br>
+			</li>
+		</ul>
+
+		<!-- Frame B: Particle A_act -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="B-act">$\B$</span> :&nbsp;
+			Particle <span class="A-act">$\BAa$</span>
+		</h3>
+
+		<p class="content">
+			This represents Alice's <b>actual</b> space-time position.
+		</p>
+
+		<p class="content">
+			We derive coordinates of $\BAa$ in this frame by imposing the constraints that
+			Alice's measured speed is $v$, hence $x \= \vt$, and that Alice's
+			proper distance from the origin of space-time is $|\t|$, hence by the metric
+			$|\t| \= {\small \sqr{{t}^2 \- x^2/\c^2}} \=$
+			${\small \sqr{{t}^2 \- v^2\,t^2/\c^2}} \= |t|\/\gb$,
+			whence, with the direction of $t$ in accordance with that of $\t$,
+			$t \= \gbt$ and $x \= \v\gbt$.
+		</p>
+
+		<p class="content">
+			In summary, we get:<br>
+			$\pBAa(\t) \~ \vec{1}{v}\gbt$<br>
+			$\ovv^\vex{\BAa}(\t) \~ \vec{1}{v}\gb$<br>
+		</p>
+
+		<p class="content">
+			with coordinates as derived above:<br>
+			$t^\vex{\BAa}(\t) \= \gbt \quad\quad \inc{0}{\gb}\T$<br>
+			$x^\vex{\BAa}(\t) \= \v\gbt \quad\, \inc{0}{\b\gb}\c\T$<br>
+		</p>
+
+		<p class="content">
+			hence, by taking derivatives w.r.t. $\t$, the velocity.
+		</p>
+
+		<p class="content ccapt">
+			Also, since Alice's measured speed is $v \= x^\vex{\BAa} / t^\vex{\BAa}$:
+		</p>
+
+		<ul class="content clist">
+			<li>
+				Alice's <b>world line</b> is the line with slope $1/v \= 1/(\c\b)$ through $\pBAa$,<br>
+				i.e. $t \= \gbt \+ (x \- \v\gbt)/v$, whence $t \= x\/(\c\b)$ &nbsp;
+				(or $x \= 0\,$ if $v \= 0$).<br>
+			</li>
+			<li>
+				Alice's <b>simultaneity plane</b> is the line with slope $\b/\c$ through $\pBAa$,<br>
+				i.e. $t \= \gbt \+ \b (x \- \v\gbt)/\c$, whence $t \= \t/\gb \+ \b x/\c$.<br>
+			</li>
+			<li>
+				Alice's <b>light cones</b> are the lines with slope $\pm\! 1$ through $\pBAa$,<br>
+				i.e. $t \= \gbt \pmf (x \- \v\gbt)/\c$, whence $t \= \exb\t/\gb \pmf x/\c$.<br>
+			</li>
+		</ul>
+
+		<!-- Frame B: Particle A_sim -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="B-act">$\B$</span> :&nbsp;
+			Particle <span class="A-sim">$\BAs$</span>
+		</h3>
+
+		<p class="content">
+			This represents what Bob <b>measures</b> of Alice: here
+			he finds her length-contracted and time-dilated.
+		</p>
+
+		<p class="content">
+			We derive coordinates of $\BAs$ in this frame by
+			intersecting Alice's world line, $t \= x\/v$, with
+			Bob's simultaneity plane, $t \= \t$, whence $x \= \v\t$.
+		</p>
+
+		<p class="content">
+			In summary, we get:<br>
+			$\pBAs(\t) \~ \vec{1}{v}\t$<br>
+			$\ovv^\vex{\BAs}(\t) \~ \vec{1}{v}$<br>
+		</p>
+
+		<p class="content">
+			with coordinates as derived above:<br>
+			$t^\vex{\BAs}(\t) \= \t \quad\quad \inc{0}{1}\T$<br>
+			$x^\vex{\BAs}(\t) \= \v\t \quad\; \inc{0}{\b}\c\T$<br>
+		</p>
+
+		<p class="content">
+			hence, by taking derivatives w.r.t. $\t$, the velocity.
+		</p>
+
+		<!-- Frame B: Particle B_sim -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="B-act">$\B$</span> :&nbsp;
+			Particle <span class="B-sim">$\BBs$</span>
+		</h3>
+
+		<p class="content">
+			This represents what Alice <b>measures</b> of Bob: here
+			she finds him length-contracted and time-dilated.
+		</p>
+
+		<p class="content">
+			We derive coordinates of $\BBs$ in this frame by
+			intersecting Bob's world line, $x \= 0$, with
+			Alice's simultaneity plane, $t \= \t/\gb \+ \b x/\c$,
+			whence $t \= \t/\gb$.
+		</p>
+
+		<p class="content">
+			In summary, we get:<br>
+			$\pBBs(\t) \~ \vec{1}{0}\t/\gb$<br>
+			$\ovv^\vex{\BBs}(\t) \~ \vec{1}{0}/\gb$<br>
+		</p>
+
+		<p class="content">
+			with coordinates as derived above:<br>
+			$t^\vex{\BBs}(\t) \= \t/\gb \quad \inc{0}{1/\gb}\T$<br>
+			$x^\vex{\BBs}(\t) \= 0 \quad\quad\; \inc{0}{0}\c\T$<br>
+		</p>
+
+		<p class="content">
+			hence, by taking derivatives w.r.t. $\t$, the velocity.
+		</p>
+
+		<!-- Frame B: Particle A_vis -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="B-act">$\B$</span> :&nbsp;
+			Particle <span class="A-vis">$\BAv$</span>
+		</h3>
+
+		<p class="content">
+			This represents what to Bob <b>appears</b> of Alice,
+			i.e. by just observing her from his position.
+		</p>
+
+		<p class="content">
+			We derive coordinates of $\BAv$ in this frame by intersecting
+			Alice's world line, $t \= x\/v$, with
+			Bob's negative light cone, $t \= \t \- x/\c$,
+			whence $t \= \epb\t$ and $x \= \v\epb\t$.
+		</p>
+
+		<p class="content">
+			In summary, we get:<br>
+			$\pBAv(\t) \~ \vec{1}{v}\epb\t$<br>
+			$\ovv^\vex{\BAv}(\t) \~ \vec{1}{v}\epb$<br>
+		</p>
+
+		<p class="content">
+			with coordinates as derived above:<br>
+			$t^\vex{\BAv}(\t) \= \epb\t \quad\quad \inc{0}{\epb}\T$<br>
+			$x^\vex{\BAv}(\t) \= \v\epb\t \quad\, \inc{0}{\b\epb}\c\T$<br>
+		</p>
+
+		<p class="content">
+			hence, by taking derivatives w.r.t. $\t$, the velocity.
+		</p>
+
+		<!-- Frame B: Particle B_vis -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="B-act">$\B$</span> :&nbsp;
+			Particle <span class="B-vis">$\BBv$</span>
+		</h3>
+
+		<p class="content">
+			This represents what to Alice <b>appears</b> of Bob,
+			i.e. by just observing him from her position.
+		</p>
+
+		<p class="content">
+			We derive coordinates of $\BBv$ in this frame by intersecting
+			Bob's world line, $x \= 0$, with
+			Alice's positive light cone, $t \= \epb\t/\gb \+ x/\c$,
+			whence $t \= \epb\t/\gb$.
+		</p>
+
+		<p class="content">
+			In summary, we get:<br>
+			$\pBBv(\t) \~ \vec{1}{0}\epb\t/\gb$<br>
+			$\ovv^\vex{\BBv}(\t) \~ \vec{1}{0}\epb\/\gb$<br>
+		</p>
+
+		<p class="content">
+			with coordinates as derived above:<br>
+			$t^\vex{\BBv}(\t) \= \epb\t/\gb \quad \inc{0}{\epb\/\gb}\T$<br>
+			$x^\vex{\BBv}(\t) \= 0 \quad\quad\quad\;\, \inc{0}{0}\c\T$<br>
+		</p>
+
+		<p class="content">
+			hence, by taking derivatives w.r.t. $\t$, the velocity.
+		</p>
+
+		<!-- Frame B: Diagram boundaries ---------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="B-act">$\B$</span> :&nbsp;
+			Diagram boundaries
+		</h3>
+
+		<p class="content">
+			Extrapolating, coordinate boundaries in frame $\B$ are:<br>
+			$t \in \ivc{0}{\gb}\T \quad\;\;\, \subseteq \ivc{0}{\gb}\T$<br>
+			$x \in \ivc{0}{\b\gb}\c\T \; \subseteq \ivc{0}{\gb}\c\T$<br>
+		</p>
+	</div>
+
+	<div class="layout">
+		<h2 class="content">
+			Frame <span class="A-act">$\A$</span>
+		</h2>
+
+		<p class="content">
+			This is the frame of reference in which <b>Alice</b> is at rest at the origin of space.
+		</p>
+
+		<p class="content">
+			We derive coordinates in this frame by Lorentz-transforming by speed $v$
+			the corresponding coordinates in frame $\B$.
+		</p>
+
+		<p class="content">
+			We double-check that the results obtained are <i>symmetric</i> to those
+			in frame $\B$, i.e. they are the same modulo swapping any $\pri{\A}$, resp.
+			$\pri{\B}$ particles with the corresponding $\B$, resp. $\A$ particles,
+			and inverting the sign of the space coordinates in all places.
+		</p>
+
+		<!-- Frame A: Particle A_act -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="A-act">$\A$</span> :&nbsp;
+			Particle <span class="A-act">$\AAa$</span>
+		</h3>
+
+		<p class="content">
+			Given that $\pBAa(\t) \~ \vec{1}{v}\gbt$, by transforming coordinates we get:<br>
+			$\pri{t}^\vex{\AAa}(\t) \= \gb \left( \gbt \- v^2\,\gbt/\c^2 \right) \= \t$<br>
+			$\pri{x}^\vex{\AAa}(\t) \= \gb \left( \v\gbt \- \v\gbt \right) \= 0$<br>
+		</p>
+
+		<p class="content">
+			Whence $\pAAa(\t) \~ \vec{1}{0}\t$, symmetric to $\pBBa$ as expected.
+		</p>
+
+		<!-- Frame A: Particle B_act -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="A-act">$\A$</span> :&nbsp;
+			Particle <span class="B-act">$\ABa$</span>
+		</h3>
+
+		<p class="content">
+			Given that $\pBBa(\t) \~ \vec{1}{0}\t$, by transforming coordinates we get:<br>
+			$\pri{t}^\vex{\ABa}(\t) \= \gb \left( \t \- 0 \right) \= \gbt$<br>
+			$\pri{x}^\vex{\ABa}(\t) \= \gb \left( 0 \- \v\t \right) \= \!-\!\!\v\gbt$<br>
+		</p>
+
+		<p class="content">
+			Whence $\pABa(\t) \~ \vec{1}{-\!v}\gbt$, symmetric to $\pBAa$ as expected.
+		</p>
+
+		<!-- Frame A: Particle B_sim -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="A-act">$\A$</span> :&nbsp;
+			Particle <span class="B-sim">$\ABs$</span>
+		</h3>
+
+		<p class="content">
+			Given that $\pBBs(\t) \~ \vec{1}{0}\t/\gb$, by transforming coordinates we get:<br>
+			$\pri{t}^\vex{\ABs}(\t) \= \gb \left( \t/\gb \- 0 \right) \= \t$<br>
+			$\pri{x}^\vex{\ABs}(\t) \= \gb \left( 0 \- \v\t/\gb \right) \= \!-\!\!\v\t$<br>
+		</p>
+
+		<p class="content">
+			Whence $\pABs(\t) \~ \vec{1}{-\!v}\t$, symmetric to $\pBAs$ as expected.
+		</p>
+
+		<!-- Frame A: Particle A_sim -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="A-act">$\A$</span> :&nbsp;
+			Particle <span class="A-sim">$\AAs$</span>
+		</h3>
+
+		<p class="content">
+			Given that $\pBAs(\t) \~ \vec{1}{v}\t$, by transforming coordinates we get:<br>
+			$\pri{t}^\vex{\ABa}(\t) \= \gb \left( \t \- v^2\,\t/\c^2 \right) \= \t/\gb$<br>
+			$\pri{x}^\vex{\ABa}(\t) \= \gb \left( \v\t \- \v\t \right) \= 0$<br>
+		</p>
+
+		<p class="content">
+			Whence $\pAAs(\t) \~ \vec{1}{0}\t/\gb$, symmetric to $\pBBs$ as expected.
+		</p>
+
+		<!-- Frame A: Particle B_vis -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="A-act">$\A$</span> :&nbsp;
+			Particle <span class="B-vis">$\ABv$</span>
+		</h3>
+
+		<p class="content">
+			Given that $\pBBv(\t) \~ \vec{1}{0}\epb\t/\gb$, by transforming coordinates we get:<br>
+			$\pri{t}^\vex{\ABa}(\t) \= \gb \left( \epb\t/\gb \- 0 \right) \= \epb\t$<br>
+			$\pri{x}^\vex{\ABa}(\t) \= \gb \left( 0 \- \v\epb\t/\gb \right) \= \!-\!\!\v\epb\t$<br>
+		</p>
+
+		<p class="content">
+			Whence $\pABv(\t) \~ \vec{1}{-\!v}\epb\t$, symmetric to $\pBAv$ as expected.
+		</p>
+
+		<!-- Frame A: Particle A_vis -------------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="A-act">$\A$</span> :&nbsp;
+			Particle <span class="A-vis">$\AAv$</span>
+		</h3>
+
+		<p class="content">
+			Given that $\pBAv(\t) \~ \vec{1}{v}\epb\t$, by transforming coordinates we get:<br>
+			$\pri{t}^\vex{\ABa}(\t) \= \gb \left( \epb\t \- v^2\,\epb\t/\c^2 \right) \= \epb\t/\gb$<br>
+			$\pri{x}^\vex{\ABa}(\t) \= \gb \left( \v\epb\t \- \v\epb\t \right) \= 0$<br>
+		</p>
+
+		<p class="content">
+			Whence $\pAAv(\t) \~ \vec{1}{0}\epb\t/\gb$, symmetric to $\pBBv$ as expected.
+		</p>
+
+		<!-- Frame A: Diagram boundaries ---------------------------------------->
+
+		<h3 class="content">
+			Frame <span class="A-act">$\A$</span> :&nbsp;
+			Diagram boundaries
+		</h3>
+
+		<p class="content">
+			Symmetrically to frame $\B$, coordinate boundaries in frame $\A$ are:<br>
+			$\pri{t} \in \ivc{0}{\gb}\T \quad\quad\:\, \subseteq \ivc{0}{\gb}\T$<br>
+			$\pri{x} \in \ivc{-\!\b\gb}{0}\c\T \; \subseteq \ivc{-\!\gb}{0}\c\T$<br>
+		</p>
+	</div>
+
+	<div class="layout">
+		<p class="content">
+			That completes our calculations.
+		</p>
+	</div>
+
+	<p class="foot">
+		SR.Inertial version 1.1.0<br>
+		&copy; 2020-2022 Julio P. Di Egidio<br>
+		Released under GNU-GPLv3<br>
+		<a href="https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity">Project home page</a><br>
+	</p>
+
+	<script src="../../../shared/scripts/doc.mathjax.js"></script>
+	<script src="../../../shared/scripts/mathjax3/tex-chtml.js"></script>
+</body>
+</html>

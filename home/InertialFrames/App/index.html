@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <!--
-InertialFrames version 1.1.0
-STUDY.Physics.SpecialRelativity/InertialFrames
-Physics case studies: Special Relativity: Inertial Frames
+	SR.Inertial version 1.1.0
+	STUDY.Physics.SpecialRelativity/InertialFrames
+	Physics case studies: Special Relativity: Inertial Frames
 
-Copyright (C) 2020-2022 Julio P. Di Egidio (http://julio.diegidio.name)
-InertialFrames is part of STUDY.Physics.SpecialRelativity
-(see https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity).
-InertialFrames is released under the terms of the GNU-GPLv3 license.
-As usual, NO WARRANTY OF ANY KIND is implied.
+	Copyright (C) 2020-2022 Julio P. Di Egidio (http://julio.diegidio.name)
+	InertialFrames is part of STUDY.Physics.SpecialRelativity
+	(see https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity).
+	InertialFrames is released under the terms of the GNU-GPLv3 license.
+	As usual, NO WARRANTY OF ANY KIND is implied.
 -->
 <head>
 	<meta charset="utf-8">
-	<title>Special Relativity: Inertial Frames</title>
-	<link href="styles/main.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Special Relativity / Inertial Frames / App</title>
+	<link href="styles/app.css" rel="stylesheet">
 </head>
-<body>
-	<h1 class="head">
+<body class="app">
+	<h1 class="title">
 		Special Relativity: Inertial Frames
 	</h1>
 
@@ -27,8 +28,8 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	</p>
 
 	<p class="block">
-		<a href="../Docs/sr.inertial.md">Go to the mathematical analysis</a><br>
-		<a href="https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity">Go to the project home page</a>
+		<a href="doc.html">Go to formal analysis</a><br>
+		<a href="https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity">Go back to project page</a>
 	</p>
 
 	<div class="layout">
@@ -102,7 +103,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 							<g text-anchor="middle">
 								<text x="0" y="0" dy="0.125">0</text>
 								<text x="1" y="0" dy="0.125">&gamma;</text>
-								<text y="0" dy="0.125" data-bind="attr: { x: T['gb/g'] }">&gamma;&beta;</text>
+								<text y="0" dy="0.125" data-bind="attr: { x: T['gb/g'] }">&beta;&gamma;</text>
 							</g>
 						</g>
 					</g>
@@ -244,7 +245,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 							<g text-anchor="middle">
 								<text x="0" y="0" dy="0.125">0</text>
 								<text x="-1" y="0" dy="0.125">-&gamma;</text>
-								<text y="0" dy="0.125" data-bind="attr: { x: T['-gb/g'] }">-&gamma;&beta;</text>
+								<text y="0" dy="0.125" data-bind="attr: { x: T['-gb/g'] }">-&beta;&gamma;</text>
 							</g>
 						</g>
 					</g>
@@ -424,9 +425,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 							data-bind="visible: canStart, enable: canStart, click: start">PLAY</button>
 					<button class="play" disabled style="display: none"
 							data-bind="visible: canStop, enable: canStop, click: stop">PAUSE</button>
-					<button class="reset" disabled data-bind="enable: canReset, click: reset">
-						R<span data-bind="visible: $root.resetHard">!</span>
-					</button>
+					<button class="reset" disabled data-bind="enable: canReset, click: reset">R</button>
 					<select class="timeMul" disabled data-bind="
 						enable: true,
 						options: [0.1, 0.2, 0.5, 1, 2],
@@ -446,7 +445,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 		<table class="info" data-bind="with: info">
 			<caption>Info</caption>
 			<tr>
-				<th class="name">|v|</th>
+				<th class="name">v</th>
 				<td class="oper">&epsiv;</td>
 				<td class="expr">[0,1] c</td>
 				<td class="oper">=</td>
@@ -464,7 +463,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 			<tr>
 				<th class="name">&beta;</th>
 				<td class="oper">=</td>
-				<td class="expr">|v| /c</td>
+				<td class="expr">v /c</td>
 				<td class="oper">=</td>
 				<td class="value"><span data-bind="text: beta().toFixed($root.precision)"></span></td>
 				<td class="unit"></td>
@@ -603,7 +602,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	<!-- /ko -->
 
 	<p class="foot">
-		InertialFrames version 1.1.0<br>
+		SR.Inertial version 1.1.0<br>
 		&copy; 2020-2022 Julio P. Di Egidio<br>
 		Released under GNU-GPLv3<br>
 		<a href="https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity">Project home page</a><br>

@@ -14,14 +14,16 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	"use strict";
 
 	///////////////////////////////////////////////////////////////////////////
-	// Math
+	// Numbers
 	///////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * Computes the "closed" modulo of v by m.
+	 * Computes the "closed modulo" of v by m.
 	 * 
 	 * @description
-	 * cmod(v, m) := 0 if v == 0, else m if (v mod m) == 0, else v mod m
+	 * cmod(v, m) := 0  if v == 0
+	 *               m  if v <> 0 /\ v mod m == 0
+	 *               v mod m  otherwise
 	 * 
 	 * @function cmod
 	 * @param {number} v
@@ -36,10 +38,12 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	}
 
 	/**
-	 * Computes v clipped to the interval [min, max].
+	 * Computes the "clipping" of v in the interval [min, max].
 	 * 
 	 * @description
-	 * clip(v, min, max) := min if v < min, else max if v > max, else v
+	 * clip(v, min, max) := min  if v < min
+	 *                      max  if v > max
+	 *                      v  otherwise
 	 * 
 	 * @function clip
 	 * @param {number} v
@@ -54,7 +58,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	}
 
 	/** 
-	 * Computes the relativistic gamma of v.
+	 * Computes the "relativistic gamma" of v.
 	 * 
 	 * @description
 	 * gamma(v) := 1 / sqrt(1 - v**2)
@@ -75,7 +79,8 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	 * Constructs a new {@link Scalar} (i.e. "scalable number") object.
 	 * 
 	 * @description
-	 * new Scalar(v, b, p).val(p) := v * b^(p+q)
+	 * new Scalar(v, b, p).val(q) := 0  if v == 0
+	 *                               v * b^(p+q)  otherwise
 	 * 
 	 * @constructor {Scalar} Scalar
 	 * @param {number} v
@@ -92,14 +97,14 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	 * Computes the scaled value of a {@link Scalar} object.
 	 * 
 	 * @description
-	 * new Scalar(v, b, p).val(p) := v * b^(p+q)
+	 * new Scalar(v, b, p).val(q) := 0  if v == 0
+	 *                               v * b^(p+q)  otherwise
 	 * 
 	 * @method val
 	 * @param {number} q
 	 * @returns {number}
 	 */
 	Scalar.prototype.val = function (q) {
-		// 0-prevalent (e.g. in 0*oo):
 		if (this.v === 0) { return 0; }
 		return this.v * Math.pow(this.b, this.p + q);
 	};

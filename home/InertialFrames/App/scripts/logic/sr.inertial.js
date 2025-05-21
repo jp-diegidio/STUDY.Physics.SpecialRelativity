@@ -31,7 +31,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 	 */
 	function Logic(_b) {
 		var _g = $Math.gamma(_b);
-		var _1d1pb = 1 / (1 + _b);
+		var _e = 1 / (1 + _b);
 
 		function Part(f, b, p) {
 			// t(tau) = f * tau * g^p
@@ -66,7 +66,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 				sim: new Part(1, 0, -1),
 				// tBV(tau) := tBA(tau/(g(1+b))) = tau/(g(1+b))
 				// xBV(tau) := xBA(tau/(g(1+b))) = 0
-				vis: new Part(_1d1pb, 0, -1)
+				vis: new Part(_e, 0, -1)
 			},
 			A: {
 				// tAA(tau) := g*tau
@@ -77,7 +77,7 @@ As usual, NO WARRANTY OF ANY KIND is implied.
 				sim: new Part(1, _b, 0),
 				// tAV(tau) := tAA(tau/(g(1+b))) = tau/(1+b)
 				// xAV(tau) := xAA(tau/(g(1+b))) = b*tau/(1+b)
-				vis: new Part(_1d1pb, _b, 0)
+				vis: new Part(_e, _b, 0)
 			}
 		};
 

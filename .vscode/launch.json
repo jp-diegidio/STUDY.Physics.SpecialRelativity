@@ -3,16 +3,10 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Cases (Chrome)",
+			"name": "Home/InertialFrames (chrome)",
 			"type": "chrome",
 			"request": "launch",
-			"file": "${workspaceFolder}\\Code\\cases\\index.html"
-		},
-		{
-			"name": "Cases/InertialFrames (Chrome)",
-			"type": "chrome",
-			"request": "launch",
-			"file": "${workspaceFolder}\\Code\\cases\\InertialFrames\\App\\index.html"
+			"file": "${workspaceFolder}/home/InertialFrames/App/index.html"
 		}
 	]
 }
