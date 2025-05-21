@@ -8,39 +8,33 @@ This program is released under the terms of the GNU-GPLv3 license.
 As usual, NO WARRANTY OF ANY KIND is implied.
 */
 
-@import url(../../../../shared/styles/font.css);
-@import url(../../../../shared/styles/layout.css);
-@import url(../../../../shared/styles/appear.css);
-
-.B-act,
-.B-sim,
-.B-vis,
-.A-act,
-.A-sim,
-.A-vis {
-	/* background-color: #303030; */
-}
+@import url(../../../shared/styles/font.css);
+@import url(../../../shared/styles/layout.css);
+@import url(../../../shared/styles/layout.ctrl.css);
+@import url(../../../shared/styles/layout.info.css);
+@import url(../../../shared/styles/layout.data.css);
+@import url(../../../shared/styles/appear.css);
 
 .B-act {
-	color: #2040ff;
+	color: #5090ff;
 }
 
 .B-sim {
-	color: #20c0e0;
+	color: #30d0f0;
 }
 
 .B-vis {
-	color: #20e020;
+	color: #20b820;
 }
 
 .A-act {
-	color: #f02020;
+	color: #e03030;
 }
 
 .A-sim {
-	color: #f07f00;
+	color: #e07f00;
 }
 
 .A-vis {
-	color: #f0f000;
+	color: #e0c000;
 }
