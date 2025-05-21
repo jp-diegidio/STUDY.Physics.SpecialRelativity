@@ -110,13 +110,13 @@
 					<g stroke-width="0.0050" stroke-dasharray="0.05 0.03" data-bind="with: cone">
 						<!-- Cones:B -->
 						<g stroke="blue" clip-path="url(#graphB-clip)">
-							<line x1="0" x2="1" data data-bind="attr: { y1: B.p.t0_dg, y2: B.p.t1_dg }"></line>
-							<line x1="0" x2="1" data data-bind="attr: { y1: B.n.t0_dg, y2: B.n.t1_dg }"></line>
+							<line x1="0" x2="1" data-bind="attr: { y1: B.p.t0_dg, y2: B.p.t1_dg }"></line>
+							<line x1="0" x2="1" data-bind="attr: { y1: B.n.t0_dg, y2: B.n.t1_dg }"></line>
 						</g>
 						<!-- Cones:A -->
 						<g stroke="red" clip-path="url(#graphB-clip)">
 							<line x1="0" x2="1" data-bind="attr: { y1: A.p.t0_dg, y2: A.p.t1_dg }"></line>
-							<line x1="0" x2="1" data data-bind="attr: { y1: A.n.t0_dg, y2: A.n.t1_dg }"></line>
+							<line x1="0" x2="1" data-bind="attr: { y1: A.n.t0_dg, y2: A.n.t1_dg }"></line>
 						</g>
 					</g>
 					<!-- /ko -->
@@ -153,16 +153,16 @@
 					<g stroke-dasharray="0.08 0.025 0.01 0.025" data-bind="with: hyper">
 						<!-- Hyper:BA.act -->
 						<g stroke-width="0.0100" clip-path="url(#graphB-clip)">
-							<path data-bind="attr: { d: act.pathSVG }"></path>
+							<path d="" data-bind="attr: { d: act.pathSVG }"></path>
 						</g>
 						<!-- ko if: false -->
 						<!-- Hyper:BA.sim -->
 						<g stroke-width="0.0075" clip-path="url(#graphB-clip)">
-							<path data-bind="attr: { d: sim.pathSVG }"></path>
+							<path d="" data-bind="attr: { d: sim.pathSVG }"></path>
 						</g>
 						<!-- Hyper:BA.vis -->
 						<g stroke-width="0.0050" clip-path="url(#graphB-clip)">
-							<path data-bind="attr: { d: vis.pathSVG }"></path>
+							<path d="" data-bind="attr: { d: vis.pathSVG }"></path>
 						</g>
 						<!-- /ko -->
 					</g>
@@ -253,12 +253,12 @@
 						<!-- Cones:A -->
 						<g stroke="red" clip-path="url(#graphA-clip)">
 							<line x1="0" x2="-1" data-bind="attr: { y1: A.p.t0_dg, y2: A.p.t1_dg }"></line>
-							<line x1="0" x2="-1" data data-bind="attr: { y1: A.n.t0_dg, y2: A.n.t1_dg }"></line>
+							<line x1="0" x2="-1" data-bind="attr: { y1: A.n.t0_dg, y2: A.n.t1_dg }"></line>
 						</g>
 						<!-- Cones:B -->
 						<g stroke="blue" clip-path="url(#graphA-clip)">
-							<line x1="0" x2="-1" data data-bind="attr: { y1: B.p.t0_dg, y2: B.p.t1_dg }"></line>
-							<line x1="0" x2="-1" data data-bind="attr: { y1: B.n.t0_dg, y2: B.n.t1_dg }"></line>
+							<line x1="0" x2="-1" data-bind="attr: { y1: B.p.t0_dg, y2: B.p.t1_dg }"></line>
+							<line x1="0" x2="-1" data-bind="attr: { y1: B.n.t0_dg, y2: B.n.t1_dg }"></line>
 						</g>
 					</g>
 					<!-- /ko -->
@@ -296,20 +296,20 @@
 						<!-- Hyper:AB.act -->
 						<g stroke-width="0.0100" clip-path="url(#graphA-clip)">
 							<g transform="scale(-1 1)">
-								<path data-bind="attr: { d: act.pathSVG }"></path>
+								<path d="" data-bind="attr: { d: act.pathSVG }"></path>
 							</g>
 						</g>
 						<!-- ko if: false -->
 						<!-- Hyper:AB.sim -->
 						<g stroke-width="0.0075" clip-path="url(#graphA-clip)">
 							<g transform="scale(-1 1)">
-								<path data-bind="attr: { d: sim.pathSVG }"></path>
+								<path d="" data-bind="attr: { d: sim.pathSVG }"></path>
 							</g>
 						</g>
 						<!-- Hyper:AB.vis -->
 						<g stroke-width="0.0050" clip-path="url(#graphA-clip)">
 							<g transform="scale(-1 1)">
-								<path data-bind="attr: { d: vis.pathSVG }"></path>
+								<path d="" data-bind="attr: { d: vis.pathSVG }"></path>
 							</g>
 						</g>
 						<!-- /ko -->
