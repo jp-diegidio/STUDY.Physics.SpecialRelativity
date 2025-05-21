@@ -12,9 +12,9 @@ This repository features the following case studies:
   They reset their clocks to zero at the moment they are colocated.  
   - [Formal analysis](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/content/InertialFrames/doc.html)
   - [Interactive diagram](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/content/InertialFrames/app.html)
-  - [Source code](https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity/tree/master/InertialFrames)
+  - [Source code](https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity/tree/master/content/InertialFrames)
 
-More are in the making, up to the **Twin Paradox**.
+More in the making, possibly up to the **Twin Paradox**.
 
 ## Legal
 
