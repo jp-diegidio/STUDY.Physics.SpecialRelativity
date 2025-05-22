@@ -1,6 +1,6 @@
 # SR/InertialFrames
 
-**SR/InertialFrames v2.2.1**  
+**SR/InertialFrames v2.2.2**  
 STUDY.Physics.SpecialRelativity/InertialFrames  
 Physics case studies: Special Relativity: Inertial Frames  
 https://github.com/jp-diegidio/STUDY.Physics.SpecialRelativity  
@@ -31,13 +31,12 @@ And this already and essentially is **time travel**.
 
 In particular, the 4-velocity of light in any frame of reference is (scalarly)
 **infinite** in all components, its magnitude being exactly the *measured light*
-*speed* times its Lorentz factor (see [the formal analysis] for details).
+*speed* times its Lorentz factor (see the formal analysis for details).
 
 ## Changes
 
-Changes from v1.0.0-alpha:
-
-  - [Func] Added isochrones to diagram
-  - [Func] Analysis fully rewritten
+Changes v1.0.0-alpha -> v2.2.2:
+  - [Func] [inertial] Added isochrones to diagram
+  - [Func] [inertial] Analysis fully rewritten
   - [Impl] Improved code throughout
   - [Tech] Restructured folders <= BREAKING: Most URL's have changed!

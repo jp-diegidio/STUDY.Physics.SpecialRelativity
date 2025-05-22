@@ -7,7 +7,7 @@ This is an **open project**: collaboration is welcome.
 
 This repository features the following case studies:
 
-- **Inertial Frames** v2.2.1  
+- **Inertial Frames** v2.2.2  
   Bob and Alice pass by each other collinearly at a relative constant speed.  
   They reset their clocks to zero at the moment they are colocated.  
   - [Formal analysis](https://jp-diegidio.github.io/STUDY.Physics.SpecialRelativity/content/InertialFrames/doc.html)

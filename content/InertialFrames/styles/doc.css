@@ -11,17 +11,8 @@
 @import url(../../../shared/styles/layout.css);
 @import url(../../../shared/styles/appear.css);
 
-.B-act,
-.B-sim,
-.B-vis,
-.A-act,
-.A-sim,
-.A-vis {
-	/* background-color: #303030; */
-}
-
 .B-act {
-	color: #2040ff;
+	color: #4060ff;
 }
 
 .B-sim {
